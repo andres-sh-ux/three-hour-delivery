@@ -1,0 +1,61 @@
+/* pdp-buy-box · live-site rebuild of the PDP quantity column (supplyhouse.com, 2026-10-21).
+   Tiles keep min-width 100px each, which is what makes this column 300px wide at 992 (as on live).
+   Prototype code: review and test before using anywhere near production. */
+.sh-pdp-buy { display: flex; flex-direction: column; }
+
+.sh-pdp-buy__row { display: flex; align-items: center; }
+.sh-pdp-buy__stepper { display: flex; align-items: center; margin-right: 12px; }
+.sh-pdp-buy__step { width: 44px; height: 44px; padding: 8px 0; border: 1px solid var(--color-gray-400); background: var(--color-white);
+  font-size: 30px; line-height: 26px; font-weight: 400; color: var(--color-blue-700); }
+.sh-pdp-buy__step--minus { border-radius: 8px 0 0 8px; }
+.sh-pdp-buy__step--plus { border-radius: 0 8px 8px 0; }
+.sh-pdp-buy__step:disabled { color: var(--color-gray-300); cursor: default; }
+.sh-pdp-buy__qty { display: block; margin: 0 -1px; }
+.sh-pdp-buy__qty input { display: block; width: 54px; height: 44px; padding: 8px 4px; border: 1px solid var(--color-gray-400); border-radius: 0;
+  font: inherit; font-size: 18px; text-align: center; color: var(--color-gray-800); background: var(--color-white); }
+.sh-pdp-buy__price { display: flex; flex-direction: column; gap: 2px; }
+.sh-pdp-buy__was { font-size: 11px; line-height: 11px; }
+.sh-pdp-buy__now { white-space: nowrap; line-height: 24px; }
+.sh-pdp-buy__now strong { font-size: 24px; line-height: 24px; font-weight: 700; color: var(--color-blue-800); }
+.sh-pdp-buy__unit { font-size: 11px; }
+
+.sh-pdp-buy__tiers { position: relative; margin-top: 20px; padding: 20px 16px 16px; border: 1px solid var(--color-gray-300); }
+.sh-pdp-buy__tiers-title { position: absolute; top: -12px; left: 0; margin-left: 12px; padding: 0 4px; background: var(--color-white);
+  font-size: 12px; line-height: 24px; font-weight: 700; letter-spacing: .5px; color: var(--color-gray-700); }
+.sh-pdp-buy__tier { display: flex; align-items: baseline; justify-content: space-between; line-height: 20px; }
+.sh-pdp-buy__tier-qty { font-size: 14px; font-weight: 700; }
+.sh-pdp-buy__tier strong { font-size: 16px; font-weight: 700; color: var(--color-blue-800); }
+
+.sh-pdp-buy__cart { display: flex; align-items: center; justify-content: center; width: 100%; height: 50px; margin-top: 24px; padding: 12px 16px;
+  background: var(--color-orange-500); color: var(--color-white); box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .2);
+  font-size: 13px; line-height: 15.6px; font-weight: 700; }
+.sh-pdp-buy__cart svg { width: 14px; height: 12px; margin-right: 8px; fill: currentColor; }
+
+.sh-pdp-buy__inventory { margin-top: 8px; }
+.sh-pdp-buy__status { display: flex; flex-flow: column wrap; align-items: flex-start; min-height: 26px; }
+.sh-pdp-buy__promise { display: flex; align-items: center; min-height: 26px; margin-right: 10px; font-size: 18px; line-height: 21.6px; }
+.sh-pdp-buy__promise img { display: block; width: 16px; height: 16px; margin-right: 4px; }
+.sh-pdp-buy__promise strong { font-weight: 700; }
+.sh-pdp-buy__slots { font-size: 12px; line-height: 17.14px; font-weight: 700; color: var(--color-blue-700); }
+.sh-pdp-buy__slots:hover { text-decoration: underline; }
+.sh-pdp-buy__mark:not([hidden]) { margin-top: 8px; }
+
+.sh-pdp-buy__tiles { display: flex; flex-wrap: nowrap; margin: 8px 0 16px; } /* live: 16px between the tiles and the Total Available rule */
+.sh-pdp-buy__tile { display: flex; flex: 1 1 33.333%; flex-direction: column; align-items: flex-start; min-width: 100px; padding: 8px 16px;
+  border-right: 1px solid var(--color-gray-300); }
+.sh-pdp-buy__tile:first-child { padding: 8px 12px 8px 4px; }
+.sh-pdp-buy__tile:last-child { border-right: 0; }
+.sh-pdp-buy__tile-logo { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.sh-pdp-buy__tile-logo img { display: block; width: 30px; height: 30px; object-fit: contain; }
+.sh-pdp-buy__tile-label { font-size: 15px; line-height: 16.5px; font-weight: 700; }
+.sh-pdp-buy__tile-qty { margin-top: 8px; font-size: 12px; line-height: 15.6px; }
+.sh-pdp-buy__tile-when { margin-top: 6px; font-size: 12px; line-height: 15.6px; }
+.sh-pdp-buy__tile-when b { font-weight: 700; }
+.sh-pdp-buy__badge { display: flex; align-items: flex-start; gap: 2px; max-width: 116px; margin-top: 6px; padding: 3px 4px 2px 3px;
+  background: #edf7ee; border: 1px solid #c2e2c9; border-radius: 4px; }
+.sh-pdp-buy__badge img { display: block; flex-shrink: 0; width: 12px; height: 12px; padding-top: 1px; box-sizing: content-box; object-fit: contain; }
+.sh-pdp-buy__badge p { margin: 0; font-size: 11px; line-height: 15.4px; font-weight: 700; }
+
+.sh-pdp-buy__total { display: flex; flex-wrap: wrap; padding-top: 12px; border-top: 1px solid var(--color-gray-300); }
+.sh-pdp-buy__total button { display: flex; align-items: center; font-size: 13px; line-height: 18.2px; color: var(--color-black); }
+.sh-pdp-buy__total img { display: block; width: 10px; height: 6px; margin-left: 3px; }

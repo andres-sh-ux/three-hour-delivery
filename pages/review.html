@@ -1,0 +1,22 @@
+<!-- sh:title Checkout · Review -->
+<!-- Checkout Review step: layout from the live Review step (2026-11-03, second test account), filled with the Shipping step data
+     (placeholder address, Delivery Today by 2PM, 1 item). Payment details are placeholders. The Payment step isn't built:
+     CONTINUE on the Shipping step comes straight here. -->
+<!-- sh:component checkout-header -->
+
+<main id="main" data-sh-checkout-step="review">
+<!-- sh:component checkout-layout -->
+  <div class="sh-co__main">
+    <!-- sh:component checkout-review -->
+    <!-- sh:component checkout-review-payment -->
+    <!-- sh:component checkout-review-items -->
+      <!-- sh:component cart-line-item -->
+    <!-- /sh:component -->
+  </div>
+  <div class="sh-co__summary">
+    <!-- sh:component checkout-summary -->
+  </div>
+<!-- /sh:component -->
+</main>
+
+<!-- sh:component checkout-footer -->

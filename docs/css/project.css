@@ -1,0 +1,33 @@
+/* Project-level styles: page layout and spacing between sections only.
+   Use tokens from ../sh-components/foundation/tokens.css.
+   Design breakpoints only: 576 · 768 · 992 · 1200 · 1400 (build checks this). */
+body { margin: 0; background: var(--color-white); font-family: var(--font-base); color: var(--color-gray-800); }
+
+/* PLP: live layout (from brand-test). Full width, filters column (264px, library plp-filters) from 992px.
+   Side padding: 992 → 0 32 0 0 · 1400 → 52px, growing to 80px at 1920. */
+.thd-plp__filters { display: none; }
+.thd-plp__content { min-width: 0; }
+@media (min-width: 992px) {
+  .thd-plp { display: flex; align-items: flex-start; gap: 16px; padding: 0 32px 0 0; }
+  .thd-plp__filters { display: block; position: sticky; top: 0; flex: none; }
+  .thd-plp__content { flex: 1 1 auto; }
+}
+@media (min-width: 1400px) {
+  .thd-plp { gap: 40px; padding: 0 max(52px, calc((100% - 1760px) / 2)); }
+}
+
+/* Launcher (index.html) */
+.thd-launcher { max-width: 720px; margin: 0 auto; padding: 40px 16px; }
+.thd-launcher h1 { margin: 0 0 8px; font-size: 28px; line-height: 36px; font-weight: 700; }
+.thd-launcher__note { margin: 0 0 24px; color: var(--color-gray-700); }
+.thd-launcher__list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--color-gray-300); counter-reset: thd; }
+.thd-launcher__list a { display: grid; grid-template-columns: 32px 1fr; column-gap: 8px; padding: 14px 0; border-bottom: 1px solid var(--color-gray-300);
+  color: var(--color-gray-800); text-decoration: none; counter-increment: thd; }
+.thd-launcher__list a::before { content: counter(thd, decimal-leading-zero); grid-row: span 2; color: var(--color-gray-500); font-weight: 700; }
+.thd-launcher__list b { font-weight: 700; }
+.thd-launcher__list span { font-size: 14px; color: var(--color-gray-700); }
+.thd-launcher__list a:hover b { text-decoration: underline; }
+.thd-launcher__h2 { margin: 32px 0 8px; font-size: 18px; line-height: 24px; font-weight: 700; }
+.thd-launcher__list--plain { counter-reset: none; }
+.thd-launcher__list--plain a { grid-template-columns: 1fr; }
+.thd-launcher__list--plain a::before { content: none; }

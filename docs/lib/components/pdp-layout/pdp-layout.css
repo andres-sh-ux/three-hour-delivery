@@ -1,0 +1,47 @@
+/* pdp-layout · live-site rebuild of the PDP containers (supplyhouse.com, 2026-10-21).
+   Left column (gallery): 320 / 362 / 380 / 488 / 660 wide at 768 / 992 / 1200 / 1400 / 1920, sticky.
+   Right column side padding: 16 → 20 / 32 / 52 / 80. Keeps production's 1920 breakpoint (live-site).
+   Prototype code: review and test before using anywhere near production. */
+.sh-pdp {
+  display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "header" "gallery" "main";
+  align-items: start; max-width: var(--sh-max-width); margin: 0 auto; padding-top: 5px; /* live PDP sits 5px lower than the header below 992 */
+}
+.sh-pdp__gallery { grid-area: gallery; min-width: 0; padding: 0 16px; }
+.sh-pdp__header { grid-area: header; min-width: 0; padding: 0 16px; }
+.sh-pdp__main { grid-area: main; min-width: 0; padding: 0 16px; }
+
+/* quantity column | divider | options column. < 992 stacked with options first */
+.sh-pdp__buy-row { display: flex; flex-direction: column-reverse; }
+.sh-pdp__qty { position: relative; flex: 1 1 0%; width: 100%; padding: 20px 0; }
+.sh-pdp__divider { display: none; }
+.sh-pdp__options { display: flex; flex: 1 1 0%; flex-direction: column; width: 100%; }
+
+@media (min-width: 768px) {
+  .sh-pdp { grid-template-columns: 320px minmax(0, 1fr); grid-template-areas: "gallery header" "gallery main"; }
+  .sh-pdp__gallery { grid-row: 1 / span 2; position: sticky; top: 0; z-index: 2; padding: 0 0 0 20px; }
+  .sh-pdp__header, .sh-pdp__main { padding: 0 20px; }
+}
+@media (min-width: 992px) {
+  .sh-pdp { grid-template-columns: 362px minmax(0, 1fr); padding-top: 0; }
+  .sh-pdp__gallery { padding-left: 32px; }
+  .sh-pdp__header, .sh-pdp__main { padding: 0 32px; }
+  .sh-pdp__buy-row { flex-direction: row; padding: 12px 0; }
+  .sh-pdp__qty { width: auto; max-width: 400px; }
+  .sh-pdp__divider { display: block; flex: none; width: 65px; padding: 20px 0; }
+  .sh-pdp__divider::before { content: ""; display: block; width: 1px; height: 100%; margin: 0 32px; background: var(--color-gray-300); }
+  .sh-pdp__options { width: auto; }
+}
+@media (min-width: 1200px) {
+  .sh-pdp { grid-template-columns: 380px minmax(0, 1fr); }
+  .sh-pdp__gallery { padding-left: 52px; }
+  .sh-pdp__header, .sh-pdp__main { padding: 0 52px; }
+}
+@media (min-width: 1400px) {
+  .sh-pdp { grid-template-columns: 488px minmax(0, 1fr); }
+  .sh-pdp__gallery { padding: 24px 0 0 80px; }
+  .sh-pdp__header, .sh-pdp__main { padding: 0 80px; }
+  .sh-pdp__qty { max-width: 420px; }
+}
+@media (min-width: 1920px) {
+  .sh-pdp { grid-template-columns: 660px minmax(0, 1fr); }
+}

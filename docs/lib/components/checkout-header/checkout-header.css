@@ -1,0 +1,48 @@
+/* checkout-header · live-site rebuild of the checkout header (supplyhouse.com, 2026-11-03)
+   < 992: 68px bar (166px logo, 14px Secure Checkout) + 50px stepper row. 992+: 107px row, 235px logo, stepper centred.
+   Live switches to the desktop header at 1024 and to the 80px gutter / 24px label at ~1440; built at 992 and 1400.
+   Prototype code: review and test before using anywhere near production. */
+.sh-coh { position: relative; z-index: 1; background: var(--color-white); box-shadow: 0 2px 4px rgba(0, 0, 0, .1); }
+.sh-coh__inner { position: relative; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  max-width: var(--sh-header-max-width); margin: 0 auto; padding: 0 16px 10px 14px; }
+.sh-coh__logo { display: flex; align-items: center; height: 68px; }
+.sh-coh__logo img { display: block; width: 166px; height: 43px; }
+.sh-coh__secure { display: flex; align-items: center; gap: 6px; font-size: 14px; line-height: 20px; }
+.sh-coh__secure img { width: 9px; height: 11px; }
+
+.sh-coh__steps { display: flex; flex: 0 0 100%; order: 3; margin: 12px 0 0 2px; padding: 0; list-style: none; }
+.sh-coh__step { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; height: 50px;
+  font-size: 12px; line-height: 17px; font-weight: 700; text-transform: uppercase; color: var(--color-gray-400); }
+.sh-coh__step + .sh-coh__step { margin-left: -14px; }
+/* chevron shape: outer layer = 1px border colour, inner layer = fill. First step has a flat left edge. */
+.sh-coh__step::before, .sh-coh__step::after { content: ""; position: absolute; inset: 0;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%, 14px 50%); }
+.sh-coh__step:first-child::before, .sh-coh__step:first-child::after { clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%); }
+.sh-coh__step::before { background: var(--color-gray-300); }
+.sh-coh__step::after { inset: 1px 1.5px 1px 1px; background: var(--color-white); }
+.sh-coh__step > span { position: relative; z-index: 1; padding-left: 8px; }
+.sh-coh__step.is-current { color: var(--color-blue-700); }
+.sh-coh__step.is-current::before { background: var(--color-blue-200); }
+.sh-coh__step.is-current::after { background: var(--color-blue-50); }
+.sh-coh__step.is-current > span { font-weight: 700; }
+.sh-coh__step.is-done { color: var(--color-blue-700); font-weight: 400; }
+.sh-coh__step.is-done::before { background: var(--color-blue-200); }
+.sh-coh__step.is-done::after { background: var(--color-blue-20); }
+.sh-coh__step.is-done > span::after { content: ""; display: inline-block; width: 8px; height: 4px; margin: 0 0 4px 8px;
+  border-left: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); }
+
+@media (min-width: 992px) {
+  .sh-coh__inner { flex-wrap: nowrap; height: 107px; padding: 0 32px 0 30px; }
+  .sh-coh__logo { height: auto; }
+  .sh-coh__logo img { width: 235px; height: 61px; }
+  .sh-coh__secure { font-size: 16px; line-height: 23px; }
+  .sh-coh__secure img { width: 12px; height: 15px; }
+  .sh-coh__steps { position: absolute; top: 34px; left: 50%; width: 43%; margin: 0; transform: translateX(-50%); }
+  .sh-coh__step { height: 40px; font-size: 14px; line-height: 20px; }
+}
+@media (min-width: 1400px) {
+  .sh-coh__inner { padding: 0 80px 0 78px; }
+  .sh-coh__secure { font-size: 24px; line-height: 34px; gap: 8px; }
+  .sh-coh__secure img { width: 13px; height: 16px; }
+  .sh-coh__steps { width: 51%; max-width: 982px; }
+}

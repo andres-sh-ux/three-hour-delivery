@@ -1,0 +1,133 @@
+/* ==========================================================================
+   Component: header-signed-in
+   Signed-in (TradeMaster member) variant. Loads AFTER header/header.css and
+   only adds / overrides what differs from the signed-out header.
+   Mirrors production supplyhouse.com (maturity: live-site).
+     < 768    rep strip (photo · "Your Rep …" · Call · Text) + Delivery / Pickup row
+     768–991  "Free Shipping on All Orders" + zip, then Delivery / Pickup row
+     ≥ 992    one row: Delivery | Pickup | Your Zip … phone · Order Status · Saved Carts · Lists
+              tools row shows the rep (photo, name, phone) + Reorder + Account + Cart
+   Depends on: header (CSS + JS), foundation/*
+   ========================================================================== */
+
+/* offline / away status dot */
+.sh-status__dot--offline { background: var(--color-gray-400); }
+
+/* ---- member bar (replaces the signed-out top bar) ---------------------- */
+.sh-header__member {
+  display: flex; flex-direction: column;
+  max-width: var(--sh-header-max-width); margin: 0 auto;
+  font-size: 12px; color: var(--color-gray-800);
+}
+.sh-header__chev { width: 10px !important; height: auto !important; margin: 0 !important; vertical-align: middle; }
+.sh-header__dot { align-self: center; font-size: 8px; margin: 0 10px; }
+
+/* < 768: rep strip */
+.sh-header__rep-strip {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 5px 15px; font-size: 12px; font-weight: 700; line-height: 1.4;
+}
+.sh-header__rep-who { display: inline-flex; align-items: center; gap: 4px; }
+.sh-header__rep-photo { width: 20px; height: 20px; object-fit: cover; margin-right: 2px; }
+.sh-header__rep-links { display: inline-flex; gap: 20px; }
+.sh-header__rep-links a { display: inline-flex; align-items: center; gap: 4px; color: var(--color-gray-800) !important; font-weight: 700; }
+.sh-header__rep-links svg { width: 14px; height: 12px; fill: var(--color-gray-800); }
+
+/* 768+: utility row */
+.sh-header__utility { display: none; align-items: center; justify-content: space-between; padding: 10px 15px; }
+.sh-header__utility-left, .sh-header__utility-right { display: flex; align-items: center; }
+.sh-header__member .sh-header__promo { color: var(--color-yellow-610); font-size: 13px; font-weight: 700; }
+.sh-header__member .sh-header__dot { display: none; }
+.sh-header__member .sh-header__zip { display: inline-flex; align-items: baseline; font-size: 13px; }
+.sh-header__member .sh-header__zip-label { display: none; margin-right: 5px; }
+.sh-header__zip-pin {
+  display: inline-block; width: 8px; height: 8px; margin-right: 4px;
+  border: 2px solid var(--color-gray-800); border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
+}
+.sh-header__utility-right { display: none; }
+.sh-header__util-phone, .sh-header__util-link {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--color-gray-800) !important;
+}
+.sh-header__util-link + .sh-header__util-link { margin-left: 28px; }
+.sh-header__util-link svg { height: 12px; width: auto; fill: var(--color-blue-700); }
+.sh-header__util-phone svg { height: 12px; width: auto; fill: var(--color-gray-800); }
+
+/* delivery / pickup */
+.sh-header__delivery {
+  order: 2; display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 8.5px 16px; border-top: 1px solid var(--color-gray-300);
+}
+.sh-header__fulfil { display: inline-flex; align-items: center; gap: 4px; font-size: 10px !important; line-height: 12px; color: var(--color-gray-800) !important; }
+.sh-header__fulfil > img:first-child { width: 20px; height: 20px; margin-right: 2px; }
+.sh-header__fulfil b { font-weight: 700; }
+.sh-header__vline { display: none; width: 0; min-height: 12px; border-right: 1px solid var(--color-gray-400); }
+
+@media (min-width: 576px) {
+  .sh-header__fulfil { font-size: 12px !important; }
+}
+@media (min-width: 768px) {
+  .sh-header__rep-strip { display: none; }
+  .sh-header__utility { display: flex; }
+  .sh-header__member .sh-header__zip-btn { display: inline-flex; align-items: center; }
+}
+@media (min-width: 992px) {
+  .sh-header__member { flex-direction: row; align-items: center; }
+  .sh-header__delivery { order: 1; width: auto; justify-content: flex-start; padding: 11px 0 11px 18px; border-top: 0; }
+  .sh-header__vline { display: block; margin: 0 12px 0 10px; }
+  .sh-header__utility { order: 2; flex: 1 1 auto; padding: 10px 30px 10px 10px; }
+  .sh-header__member .sh-header__promo { display: none; }
+  .sh-header__member .sh-header__zip-label { display: inline; }
+  .sh-header__zip-pin { display: none; }
+  .sh-header__utility-right { display: flex; }
+  .sh-header__utility-right .sh-header__dot { display: inline; }
+}
+@media (min-width: 1200px) {
+  .sh-header__utility { padding-left: 15px; }
+  .sh-header__member .sh-header__promo { display: inline; font-size: 14px; }
+  .sh-header__member .sh-header__dot { display: inline; }
+}
+
+/* ---- logo row: Reorder joins HELP / MENU (< 992) ------------------------ */
+.sh-header__icon-btn--reorder { text-decoration: none !important; }
+.sh-header__icon-btn--reorder svg { width: 25px; height: 23px; fill: var(--color-brown-900); }
+
+/* ---- tools row (≥ 992): rep block + Reorder ----------------------------- */
+.sh-header__support--rep { padding-left: 20px !important; gap: 6px; }
+.sh-header__support--rep .sh-header__support-text { min-width: 0; }
+.sh-header__rep-line { display: inline-flex; align-items: center; gap: 3px; font-size: 12px; line-height: 14.4px; color: var(--color-gray-800); }
+.sh-header__rep-phone { font-size: 18px; font-weight: 700; line-height: 19px; color: var(--color-blue-800, #0066ad); }
+.sh-header__support--rep .sh-header__support-title { margin: 0; }
+.sh-header__action--reorder { width: 66px !important; }
+.sh-header__action--reorder svg { width: 25px; height: 25px; fill: var(--color-gray-800); }
+.sh-header__action--reorder .sh-header__action-text { margin-top: 8px; }
+
+/* ---- help panel: "Your Dedicated Rep" section --------------------------- */
+.sh-help__rep {
+  display: flex; align-items: center; gap: 15px;
+  width: 100%; max-width: 600px; margin: 0 auto; padding: 35px 30px 30px;
+  border-bottom: 1px solid var(--color-gray-300);
+}
+.sh-help__rep-photo { width: 55px; height: 55px; object-fit: cover; flex: none; }
+.sh-help__rep-text { display: flex; flex-direction: column; gap: 2px; }
+.sh-help__rep-label { font-size: 12px; font-weight: 700; color: var(--color-yellow-610); }
+.sh-help__rep-name { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 700; }
+.sh-help__rep-phone { font-size: 14px; }
+.sh-help__rep-phone a { font-size: 16px; }
+@media (min-width: 768px) {
+  .sh-header--signed-in .sh-help { flex-wrap: wrap; }
+  .sh-help__rep { flex: 1 1 50%; max-width: none; margin: 0; padding: 40px 60px; border-bottom: 0; border-right: 1px solid var(--color-gray-300); }
+  .sh-help__rep-photo { width: 45px; height: 45px; }
+  .sh-header--signed-in .sh-help__contact { flex: 1 1 50%; }
+  .sh-header--signed-in .sh-help__quick { flex: 1 1 100%; }
+}
+@media (min-width: 992px) {
+  .sh-help__rep { padding: 42px 40px 40px; }
+}
+
+/* 768–991: promo left, zip pushed right */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .sh-header__utility-left { flex: 1 1 auto; justify-content: space-between; }
+}
+/* signed-in logo row has no divider before HELP */
+.sh-header--signed-in .sh-header__icon-btn--help { border-left: 0 !important; }

@@ -1,0 +1,101 @@
+/* 3-Hour Delivery proposals (project-only): marks, chips, slot badges, tooltip, banner, review panel.
+   Colours come from the exec deck: light chip #edf7ee fill + #5e9a41 border (= --color-green-50 / --color-green-500), dark chip #5e9a41.
+   Sizes: --thd-fs is each context's base size for "3-Hour" / "Early AM". */
+
+/* ---- Marks (A) and chips (B) ---- */
+.thd-mark, .thd-chip { display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; font-weight: 700; color: var(--color-gray-800); vertical-align: middle; }
+.thd-mark { font-size: var(--thd-fs, 13px); line-height: 1.2; }
+.thd-mark--text { font-weight: 400; }
+.thd-chip { padding: 1px 8px; border: 1px solid var(--color-green-500); border-radius: 12px; background: var(--color-green-50); font-size: var(--thd-cfs, 11px); line-height: 15.4px; }
+.thd-bolt { display: block; flex: none; }
+img.thd-bolt { width: 8px !important; height: 12px !important; }   /* beat component img sizes (card 18px, PDP tile 30px) */
+.thd-p-a [hidden], .thd-p-b [hidden], .thd-p-live [hidden] { display: none !important; }
+.thd-mark .thd-bolt { margin-right: 1px; }
+.thd-word { margin-left: 4px; }
+.thd-chip-dark .thd-chip { background: var(--color-green-500); color: var(--color-white); }
+.thd-chip-dark .thd-chip .thd-bolt { filter: brightness(0) invert(1); }
+
+/* Slot badges (flyout, See Time Slots, checkout): light chip in A and B, dark only with B + Dark */
+.thd-p-a :is(.sh-dflyout__badge, .sh-slots__badge, .sh-co-slot__badge),
+.thd-p-b:not(.thd-chip-dark) :is(.sh-dflyout__badge, .sh-slots__badge, .sh-co-slot__badge) {
+  padding: 2px 11px; border: 1px solid var(--color-green-500); background: var(--color-green-50); color: var(--color-gray-800); }
+.thd-p-a :is(.sh-dflyout__badge, .sh-slots__badge, .sh-co-slot__badge) img,
+.thd-p-b:not(.thd-chip-dark) :is(.sh-dflyout__badge, .sh-slots__badge, .sh-co-slot__badge) img { filter: none; }
+
+/* A selected fastest slot keeps the dark green badge, whatever the chip colour */
+:is(.thd-p-a, .thd-p-b) .sh-co-slot.is-fastest.is-selected .sh-co-slot__badge { background: var(--color-green-500); color: var(--color-white); }
+:is(.thd-p-a, .thd-p-b) .sh-co-slot.is-fastest.is-selected .sh-co-slot__badge img { filter: brightness(0) invert(1); }
+
+/* ---- Contexts ---- */
+.thd-hdr { --thd-fs: 10px; --thd-cfs: 10px; display: inline-flex; align-items: center; }
+.thd-hdr .thd-word { margin-left: 3px; }
+.sh-header__fulfil .thd-hdr img.thd-bolt { width: 10px !important; height: 15px !important; margin-right: 3px; }
+.sh-header__fulfil .thd-hdr .thd-chip img.thd-bolt { width: 8px !important; height: 11px !important; margin-right: 0; }   /* B: smaller bolt inside the top-bar chip */
+.thd-ff { --thd-fs: 11px; --thd-cfs: 10px; display: inline-flex; align-items: center; }
+.thd-ff img.thd-ff__truck { display: block; flex: none; width: 18px; height: 18px; margin-right: 4px; }
+.thd-ff .thd-chip img.thd-ff__truck { width: 16px; height: 16px; margin: -1px 2px -1px -0.5px; }   /* B: truck inside the chip; ~8px on the left like the right side */
+.thd-ff .thd-word { margin-left: 3px; font-size: 11px; line-height: 16px; font-weight: 700; }
+.thd-p-a .sh-product-card__ff-label, .thd-p-b .sh-product-card__ff-label { display: inline !important; }
+.thd-p-a .sh-product-card__ff, .thd-p-b .sh-product-card__ff { flex-basis: 100%; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-left: 0; padding: 0; }
+/* card promise: line up the delivery row with the check icon and Total Available, 4px between the three rows */
+.thd-p-a .sh-product-card__promise, .thd-p-b .sh-product-card__promise { row-gap: 4px; }
+.thd-p-a .sh-product-card__inventory, .thd-p-b .sh-product-card__inventory { margin-top: 4px; }
+.thd-p-a .sh-product-card__ff-item, .thd-p-b .sh-product-card__ff-item { align-items: center; }
+.thd-order-pickup .sh-product-card__ff-item[data-sh-ff="pickup"] { order: -1; }
+/* PDP combined icons: centre the label on the truck body, not on the icon box (the bolt / badge adds height on top) */
+.thd-iconrow img.thd-combined ~ .thd-iconrow__mark { margin-top: 4px; }
+.thd-iconrow img.thd-combined--wide ~ .thd-iconrow__mark { margin-top: 5px; }
+.thd-iconrow img.thd-combined { width: 30px; height: 26.25px; }   /* 08: viewBox 24 × 21 at the truck's 1.25 scale (bolt rises above the roof) */
+.thd-iconrow img.thd-combined--wide { width: 32.5px; height: 25px; }   /* 04b / 05b: 26 × 20 (badge overhangs the truck) */
+.thd-iconrow { min-height: 30px; display: flex; align-items: center; gap: 4px; --thd-fs: 13px; --thd-cfs: 11px; }
+.sh-ta__mark { --thd-fs: 13px; --thd-cfs: 11px; }
+.sh-cart-shipment__mark { --thd-fs: 13px; --thd-cfs: 11px; margin-left: 2px; }
+.sh-co-method__mark { --thd-fs: 13px; --thd-cfs: 11px; }
+
+@media (min-width: 992px) {
+  .thd-hdr { --thd-fs: 12px; --thd-cfs: 11px; }
+}
+
+/* ---- Product card tooltip ---- */
+.thd-tip[hidden] { display: none; }
+.thd-tip { position: absolute; z-index: var(--sh-z-overlay); width: 250px; padding: 20px 24px; border: 1px solid var(--color-gray-400); background: var(--color-white);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .12); font-size: 13px; line-height: 18px; color: var(--color-gray-800); pointer-events: none; }
+.thd-tip::after { content: ""; position: absolute; bottom: -9px; left: var(--thd-tip-caret, 116px); width: 16px; height: 16px; background: var(--color-white);
+  border-right: 1px solid var(--color-gray-400); border-bottom: 1px solid var(--color-gray-400); transform: rotate(45deg); }
+.thd-tip p + p { margin-top: 8px; }
+.thd-tip b { font-weight: 700; }
+.thd-tip__title { display: flex; align-items: center; gap: 6px; font-size: 16px; line-height: 20px; font-weight: 700; }
+.thd-tip__title img.thd-bolt { width: 10px !important; height: 15px !important; }
+
+/* ---- Banner (sample, after the live super-banner: full width, 100px tall from 992). Icon: combined truck + bolt 04b ---- */
+.thd-banner { background: var(--color-green-50); border-bottom: 1px solid #c2e2c9; }
+.thd-banner__inner { display: flex; align-items: center; gap: 12px; max-width: var(--sh-header-max-width); margin: 0 auto; padding: 12px 16px; }
+.thd-banner__icon { flex: none; width: auto; height: 36px; }
+.thd-banner__text { flex: 1 1 auto; min-width: 0; font-size: 13px; line-height: 18px; }
+.thd-banner__text b { margin-right: 8px; font-size: 16px; line-height: 22px; font-weight: 700; }
+.thd-banner__link { margin-left: 4px; font-weight: 700; color: var(--color-blue-700); white-space: nowrap; text-decoration: underline; }
+.thd-banner__link:hover { text-decoration: none; }
+@media (min-width: 992px) {
+  .thd-banner__inner { justify-content: center; min-height: 100px; padding: 0 32px; gap: 20px; }
+  .thd-banner__icon { height: 44px; }
+  .thd-banner__text { flex: 0 1 auto; font-size: 15px; line-height: 21px; }
+  .thd-banner__text b { font-size: 18px; }
+}
+
+/* ---- Review panel ---- */
+.thd-panel { position: fixed; right: 16px; bottom: 16px; z-index: 2000; width: min(400px, calc(100vw - 32px)); max-height: calc(100vh - 32px); overflow-y: auto;
+  border: 1px solid var(--color-gray-300); border-radius: 12px; background: var(--color-white); box-shadow: 0 12px 32px rgba(0, 0, 0, .14), 0 2px 6px rgba(0, 0, 0, .06); font-size: 12px; line-height: 16px; color: var(--color-gray-800); }
+.thd-panel__head { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid var(--color-gray-300); }
+.thd-panel__head b { font-size: 14px; line-height: 20px; font-weight: 700; letter-spacing: .01em; }
+.thd-panel__min { padding: 2px 0; font-size: 12px; font-weight: 700; color: var(--color-blue-700); }
+.thd-panel__body[hidden] { display: none; }
+.thd-panel__body { display: grid; gap: 10px; padding: 16px 18px 18px; }
+.thd-panel__row { display: grid; grid-template-columns: 96px minmax(0, 1fr); align-items: center; gap: 12px; }
+.thd-panel__row.is-off { opacity: .4; }
+.thd-panel__k { color: var(--color-gray-600); font-size: 12px; }
+.thd-panel__seg { display: flex; gap: 2px; padding: 3px; border-radius: 8px; background: var(--color-gray-50); box-shadow: inset 0 0 0 1px var(--color-gray-300); }
+.thd-panel__seg button, .thd-panel__seg a { flex: 1; padding: 6px 6px; border-radius: 6px; background: transparent; font-size: 12px; line-height: 16px; font-weight: 400; color: var(--color-gray-800); text-align: center; text-decoration: none; white-space: nowrap; transition: background-color .15s, color .15s; }
+.thd-panel__seg button:not(.is-on):not(:disabled):hover, .thd-panel__seg a:not(.is-on):hover { background: var(--color-white); }
+.thd-panel__seg button.is-on, .thd-panel__seg a.is-on { background: var(--color-blue-700); color: var(--color-white); font-weight: 700; box-shadow: 0 1px 2px rgba(0, 0, 0, .15); }
+.thd-panel__row--pages { margin-bottom: 6px; padding-bottom: 16px; border-bottom: 1px solid var(--color-gray-300); }
+.thd-panel__seg button:disabled { cursor: default; }

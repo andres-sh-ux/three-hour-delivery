@@ -1,0 +1,55 @@
+/* pdp-details · live-site rebuild of the PDP accordions (supplyhouse.com, 2026-10-21).
+   Prototype code: review and test before using anywhere near production. */
+.sh-pdp-details__section { margin-top: -1px; border-top: 1px solid var(--color-gray-300); border-bottom: 1px solid var(--color-gray-300); }
+.sh-pdp-details__head { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
+.sh-pdp-details__title { margin: 11px 0 10px; font-size: 18px; line-height: 21.6px; font-weight: 700; }
+.sh-pdp-details__toggle { flex: none; width: 24px; font-size: 30px; line-height: 42.86px; font-weight: 400; text-align: right; color: var(--color-blue-700); }
+.sh-pdp-details__toggle::before { content: "+"; }
+.sh-pdp-details__toggle[aria-expanded="true"]::before { content: "–"; }
+.sh-pdp-details__body { padding-bottom: 28px; }
+.sh-pdp-details__body[hidden] { display: none; }
+
+/* highlights */
+.sh-pdp-details__highlights { display: flex; flex-wrap: wrap; }
+/* live: 1 column (< 768) · 2 columns (768) · 3 columns (992) · 16px text (1400) */
+.sh-pdp-details__highlights li { display: flex; align-items: center; width: 100%; padding: 8px 28px 8px 0;
+  font-size: 14px; line-height: 16.8px; font-weight: 700; }
+.sh-pdp-details__highlights img { display: block; flex: none; width: 40px; height: 40px; margin-right: 8px; }
+
+/* description / free text */
+.sh-pdp-details__text p { margin: 0 0 10px; font-size: 14px; line-height: 19.6px; }
+.sh-pdp-details__text p:last-child { margin-bottom: 0; }
+.sh-pdp-details__text strong { font-weight: 700; }
+
+/* specifications: one column, two from 768 */
+.sh-pdp-details__specs { display: flex; flex-direction: column; }
+.sh-pdp-details__specs dl { margin: 0; width: 100%; }
+.sh-pdp-details__specs dl > div { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px solid var(--color-gray-300);
+  font-size: 13px; line-height: 18.2px; }
+.sh-pdp-details__specs dt { font-weight: 700; }
+.sh-pdp-details__specs dd { display: flex; flex-direction: column; align-items: flex-end; margin: 0; text-align: right; }
+.sh-pdp-details__specs dd span { margin-bottom: 10px; }
+.sh-pdp-details__specs dd span:last-child { margin-bottom: 0; }
+
+/* contact pill */
+.sh-pdp-details__aside { display: flex; align-items: center; }
+.sh-pdp-details__call { display: flex; align-items: center; margin: 0 10px; padding: 5px 0; border-radius: 25px; font-weight: 400; color: var(--color-gray-800); }
+.sh-pdp-details__avatar { display: block; width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+.sh-pdp-details__call-text { display: none; align-items: center; gap: 6px; margin-left: 10px; font-size: 14px; line-height: 20px; }
+.sh-pdp-details__call-text img { display: block; }
+.sh-pdp-details__call-text strong { font-weight: 700; }
+
+@media (min-width: 768px) {
+  .sh-pdp-details__highlights li { width: 50%; }
+  .sh-pdp-details__specs { flex-direction: row; justify-content: space-between; gap: 32px; }
+  .sh-pdp-details__specs dl { width: calc(50% - 16px); }
+  .sh-pdp-details__call-text { display: flex; }
+}
+@media (min-width: 992px) {
+  .sh-pdp-details__highlights li { width: 33.333%; padding-right: 40px; }
+}
+@media (min-width: 1400px) {
+  .sh-pdp-details__title { font-size: 20px; line-height: 24px; }
+  .sh-pdp-details__toggle { font-size: 34px; line-height: 48.57px; }
+  .sh-pdp-details__highlights li { font-size: 16px; line-height: 19.2px; }
+}

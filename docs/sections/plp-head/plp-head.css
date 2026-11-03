@@ -1,0 +1,55 @@
+/* plp-head · project section, rebuilt from the live PLP header (2026-10-21). Design breakpoints only. */
+.thd-plp-head__top { display: flex; justify-content: space-between; min-height: 70px; border-bottom: 1px solid var(--color-gray-300); }
+.thd-plp-head__main { display: flex; flex-direction: column; width: calc(100% - 160px); padding: 10px 0 10px 15px; overflow: hidden; }
+
+/* breadcrumb: < 768 only the parent with a back chevron; 768+ full trail with chevrons */
+.thd-plp-head__crumbs { height: 20px; padding-top: 2px; white-space: nowrap; font-size: 12px; line-height: 15px; }
+.thd-plp-head__crumbs a, .thd-plp-head__crumbs span { display: none; color: var(--color-blue-700); font-weight: 400; }
+.thd-plp-head__crumbs a:nth-last-child(2) { display: inline; }
+.thd-plp-head__crumbs a:nth-last-child(2)::before { content: url("../../lib/assets/icons/crumb-back.svg"); display: inline-block; width: 4px; height: 8px; margin-right: 8px; padding-right: 8px; }
+
+.thd-plp-head__title-row { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 8px; }
+.thd-plp-head__title { margin: 0; padding-right: 20px; font-size: 16px; line-height: 1.2; font-weight: 700; }
+.thd-plp-head__help { display: none; align-items: center; flex-shrink: 0; }
+.thd-plp-head__help img { width: 54px; height: 56px; margin-right: 10px; }
+.thd-plp-head__help-text { display: flex; flex-direction: column; }
+.thd-plp-head__help-q { font-size: 16px; line-height: 22.86px; font-weight: 700; white-space: nowrap; }
+.thd-plp-head__help-link { font-size: 14px; font-weight: 400; color: var(--color-blue-700); }
+
+.thd-plp-head__count { display: flex; align-items: center; justify-content: center; min-width: 72px; padding: 0 8px;
+  border-left: 1px solid var(--color-gray-300); font-size: 11px; }
+.thd-plp-head__filter { display: flex; align-items: center; padding: 26px 12px; border-left: 1px solid var(--color-gray-300); }
+.thd-plp-head__filter button { display: flex; align-items: center; gap: 4px; padding: 0; background: none; border: 0; cursor: pointer; font: inherit; font-size: 11px; font-weight: 700; color: var(--color-blue-700); }
+.thd-plp-head__filter img { display: block; width: 16px; height: 16px; }
+
+.thd-plp-head__bar { display: none; justify-content: space-between; margin-bottom: 16px; }
+.thd-plp-head__view { display: flex; width: 132px; height: 50px; padding: 6px; border: 1px solid var(--color-gray-400); }
+.thd-plp-head__view-btn { width: 60px; height: 36px; padding: 0; background: var(--color-white); border: 0; cursor: pointer; font: inherit; color: var(--color-gray-800); }
+.thd-plp-head__view-btn.is-active { background: var(--color-blue-700); color: var(--color-white); font-weight: 700; }
+.thd-plp-head__sort { position: relative; display: block; width: 264px; }
+.thd-plp-head__sort select { appearance: none; -webkit-appearance: none; width: 100%; height: 50px; padding: 10px 40px 10px 14px; border: 1px solid var(--color-gray-400); border-radius: 0;
+  background: var(--color-white); font: inherit; font-size: 13px; line-height: 18.57px; color: var(--color-gray-700); cursor: pointer; }
+.thd-plp-head__sort select:hover { box-shadow: inset 0 8px 22px 0 var(--color-gray-250); }
+.thd-plp-head__sort svg { position: absolute; top: 17px; right: 15px; width: 16px; height: 16px; fill: var(--color-blue-700); pointer-events: none; }
+
+@media (min-width: 576px) {
+  .thd-plp-head__main { width: calc(100% - 170px); }
+  .thd-plp-head__count { min-width: 78px; }
+}
+@media (min-width: 768px) {
+  .thd-plp-head__crumbs a, .thd-plp-head__crumbs span { display: inline; }
+  .thd-plp-head__crumbs a:nth-last-child(2)::before { content: none; }
+  .thd-plp-head__crumbs a::after { content: url("../../lib/assets/icons/crumb-next.svg"); display: inline-block; width: 4px; height: 8px; padding: 0 8px; }
+  .thd-plp-head__title { font-size: 18px; }
+}
+@media (min-width: 992px) {
+  .thd-plp-head__top { min-height: 0; margin-bottom: 12px; }
+  .thd-plp-head__main { width: 100%; padding: 16px 0 12px; }
+  .thd-plp-head__title-row { margin-top: 0; min-height: 60px; }
+  .thd-plp-head__title { margin-top: 24px; font-size: 24px; }
+  .thd-plp-head__help { display: flex; }
+  .thd-plp-head__count, .thd-plp-head__filter { display: none; }
+  .thd-plp-head__bar { display: flex; }
+}
+@media (min-width: 1200px) { .thd-plp-head__title { margin-top: 20px; } }
+@media (min-width: 1400px) { .thd-plp-head__title { font-size: 34px; } }

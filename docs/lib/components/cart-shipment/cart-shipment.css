@@ -1,0 +1,54 @@
+/* cart-shipment · live-site rebuild of the cart shipment card (supplyhouse.com, 2026-11-03)
+   Options: < 768 stacked, 768+ two per row, 1200+ three in a row.
+   Prototype code: review and test before using anywhere near production. */
+.sh-cart-shipment__card { background: var(--color-white); border: 1px solid var(--color-gray-300); }
+.sh-cart-shipment__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 80px;
+  padding: 2px 16px 0; border-bottom: 1px solid var(--color-gray-300); } /* live: fixed 80px (90px from 1200), content centred */
+.sh-cart-shipment__eyebrow { margin-bottom: 4px; font-size: 14px; line-height: 16px; }
+.sh-cart-shipment__date { font-size: 16px; line-height: 19px; font-weight: 700; }
+.sh-cart-shipment__head-icon { flex: none; width: 40px; height: 40px; }
+
+.sh-cart-shipment__body { padding: 16px 16px 8px; background: var(--color-gray-20); }
+.sh-cart-shipment__options { margin: 0; padding: 0 0 8px; border: 0; min-width: 0; }
+.sh-cart-shipment__legend { padding: 0 0 12px; font-size: 14px; line-height: 20px; }
+.sh-cart-shipment__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+
+.sh-cart-shipment__option { display: flex; align-items: flex-start; padding: 20px 16px; background: var(--color-white);
+  border: 2px solid var(--color-gray-300); border-radius: 6px; cursor: pointer; }
+.sh-cart-shipment__option.is-selected { border-color: var(--color-blue-700); }
+.sh-cart-shipment__radio { flex: none; appearance: none; width: 20px; height: 20px; margin: 4px 0 0; border: 2px solid var(--color-gray-400);
+  border-radius: 50%; background: var(--color-white); cursor: pointer; }
+.sh-cart-shipment__radio:checked { border: 6px solid var(--color-gray-800); }
+.sh-cart-shipment__radio:focus-visible { outline: 2px solid var(--color-blue-focus); outline-offset: 2px; }
+
+.sh-cart-shipment__content { display: flex; flex-direction: column; flex: 1; min-width: 0; padding-left: 12px; }
+.sh-cart-shipment__top { display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding-bottom: 8px; border-bottom: 1px solid var(--color-gray-300); }
+.sh-cart-shipment__name { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; font-size: 16px; line-height: 16px; font-weight: 700; }
+.sh-cart-shipment__name img { width: 28px; height: 28px; }
+.sh-cart-shipment__mark { display: inline-flex; align-items: center; }
+.sh-cart-shipment__mark[hidden] { display: none; }
+.sh-cart-shipment__price { font-size: 13px; line-height: 19px; white-space: nowrap; }
+.sh-cart-shipment__when { margin-top: 6px; font-size: 13px; line-height: 19px; font-weight: 700; }
+.sh-cart-shipment__note { font-size: 11px; line-height: 16px; }
+.sh-cart-shipment__hint { font-size: 12px; line-height: 17px; }
+
+.sh-cart-shipment__items { padding-top: 4px; }
+.sh-cart-shipment__clear { display: flex; justify-content: flex-end; padding: 12px 0 16px; }
+.sh-cart-shipment__clear button { display: inline-flex; align-items: center; gap: 2px; font-size: 16px; line-height: 22px; font-weight: 700; color: var(--color-blue-700); }
+.sh-cart-shipment__clear button:hover { text-decoration: underline; }
+
+@media (min-width: 768px) {
+  .sh-cart-shipment__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sh-cart-shipment__head { padding: 2px 24px 0; }
+  .sh-cart-shipment__body { padding: 16px 24px 8px; }
+}
+@media (min-width: 992px) {
+  .sh-cart-shipment__head { padding: 2px 32px 0; }
+  .sh-cart-shipment__body { padding: 16px 28px 8px; }
+}
+@media (min-width: 1200px) {
+  .sh-cart-shipment__head { height: 90px; padding-top: 4px; }
+  .sh-cart-shipment__date { font-size: 20px; line-height: 28.57px; }
+  .sh-cart-shipment__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+}

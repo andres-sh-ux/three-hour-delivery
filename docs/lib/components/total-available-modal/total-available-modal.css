@@ -1,0 +1,44 @@
+/* total-available-modal · live-site rebuild of the PDP "Total Available" modal (supplyhouse.com, 2026-11-03)
+   600px dialog (1px rgba(0,0,0,.2) border), #f8f5f3 head, 32px body padding, table 13px. < 768 it fills the screen width (16px margins).
+   Prototype code: review and test before using anywhere near production. */
+.sh-ta[hidden] { display: none; }
+.sh-ta { position: fixed; inset: 0; z-index: var(--sh-z-drawer); display: flex; align-items: flex-start; justify-content: center; padding: 16px; overflow-y: auto; }
+.sh-ta__overlay { position: fixed; inset: 0; background: rgba(52, 52, 52, .5); }
+.sh-ta__dialog { position: relative; width: 100%; max-width: 600px; margin: auto 0; border: 1px solid rgba(0, 0, 0, .2); background: var(--color-white); }
+.sh-ta__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 24px 16px 20px; background: var(--color-brown-50); border-bottom: 1px solid var(--color-gray-300); }
+.sh-ta__title { display: flex; align-items: center; gap: 4px; font-size: 20px; line-height: 28px; font-weight: 400; }
+.sh-ta__title img { width: 22px; height: 22px; margin-right: 4px; }
+.sh-ta__title b { font-size: 24px; font-weight: 700; }
+.sh-ta__close { display: flex; padding: 0; }
+.sh-ta__close img { width: 18px; height: 18px; }
+.sh-ta__body { padding: 24px 16px; }
+.sh-ta__table { width: 100%; border-collapse: collapse; font-size: 13px; line-height: 15.6px; }
+.sh-ta__table th { padding: 5px 12px; background: var(--color-gray-20); border-bottom: 1px solid var(--color-gray-300); text-align: left; font-size: 13px; line-height: 18.2px; font-weight: 700; }
+.sh-ta__table th:first-child { width: 55%; }
+.sh-ta__table td { padding: 22px 12px; border-bottom: 1px solid var(--color-gray-300); }
+.sh-ta__table td:first-child { font-size: 14px; line-height: 16.8px; font-weight: 700; }
+.sh-ta__table td.sh-ta__group-cell { padding: 12px 0 0; border-bottom: 1px solid var(--color-gray-300); font-weight: 400; }
+.sh-ta__group { border: 1px solid #c2e2c9; border-radius: 6px 6px 0 0; background: #f9fff9; }
+.sh-ta__group-title { padding: 16px 24px 16px 12px; border-bottom: 1px solid #c2e2c9; font-size: 18px; line-height: 25.2px; color: var(--color-green-500); }
+.sh-ta__group-title b { font-weight: 700; }
+.sh-ta__group-row { display: grid; grid-template-columns: 55% 1fr 1fr; align-items: center; background: var(--color-white); border-radius: 0; }
+.sh-ta__when { display: flex; flex-direction: column; gap: 4px; padding: 16px 12px; }
+.sh-ta__when p { display: flex; align-items: center; flex-wrap: wrap; gap: 4px; font-size: 14px; line-height: 19.6px; font-weight: 700; }
+.sh-ta__when img { width: 20px; height: 20px; }
+.sh-ta__mark { display: inline-flex; align-items: center; }
+.sh-ta__mark[hidden] { display: none; }
+.sh-ta__qty, .sh-ta__supplier { padding: 5px 12px; font-size: 13px; line-height: 18.57px; }
+.sh-ta__or { position: relative; margin: 12px 0; text-align: center; font-size: 13px; color: var(--color-gray-600); }
+.sh-ta__or::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px solid var(--color-gray-300); }
+.sh-ta__or span { position: relative; padding: 0 4px; background: var(--color-white); }
+.sh-ta__ship-title { padding: 0 12px 4px; font-size: 18px; line-height: 25.2px; }
+.sh-ta__ship-title b { font-weight: 700; }
+.sh-ta__foot { padding: 24px 16px; background: var(--color-gray-20); border-top: 1px solid var(--color-gray-300); font-size: 14px; line-height: 20px; }
+.sh-ta__foot b { font-weight: 700; }
+
+@media (min-width: 768px) {
+  .sh-ta { align-items: center; padding: 32px; }
+  .sh-ta__head { padding: 27px 32px 24px; }
+  .sh-ta__body { padding: 32px; }
+  .sh-ta__foot { padding: 24px 32px; }
+}

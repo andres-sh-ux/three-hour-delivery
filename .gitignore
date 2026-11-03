@@ -1,0 +1,10 @@
+.DS_Store
+# Generated for local work next to ../sh-components (docs/ is the shareable copy)
+/cart.html
+/index.html
+/pdp.html
+/plp.html
+/review.html
+/shipping.html
+/page.html
+/dist/

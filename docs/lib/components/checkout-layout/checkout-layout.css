@@ -1,0 +1,20 @@
+/* checkout-layout · live-site rebuild of the checkout page frame (supplyhouse.com, 2026-11-03)
+   Gray band runs full width; content is capped at 1920 and centred.
+   < 992 one column, cards full width. 992+ main column (padding 20/16/32/32) + 444px white summary column.
+   1400+ main padding 20/32/32/80, summary max(440px, 30.5%), 80px gray gutter on the right (live: 1440 = 916 + 440).
+   Live switches to two columns at 1024; built at 992.
+   Prototype code: review and test before using anywhere near production. */
+.sh-co { display: flex; flex-direction: column; padding: 0 max(0px, (100% - var(--sh-header-max-width)) / 2); background: var(--color-gray-50); }
+.sh-co__main { min-width: 0; padding: 0 0 12px; }
+.sh-co__summary { min-width: 0; background: var(--color-white); }
+
+@media (min-width: 992px) {
+  .sh-co { flex-direction: row; align-items: stretch; }
+  .sh-co__main { flex: 1 1 auto; padding: 20px 16px 32px 32px; }
+  .sh-co__summary { flex: 0 0 444px; border-left: 1px solid var(--color-gray-300); border-right: 1px solid var(--color-gray-300); }
+}
+@media (min-width: 1400px) {
+  .sh-co { padding-right: calc(80px + max(0px, (100% - var(--sh-header-max-width)) / 2)); }
+  .sh-co__main { padding: 20px 32px 32px 80px; }
+  .sh-co__summary { flex-basis: max(440px, 30.5%); }
+}

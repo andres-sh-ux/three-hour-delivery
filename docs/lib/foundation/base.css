@@ -1,0 +1,68 @@
+/* ==========================================================================
+   SupplyHouse components — base
+   Scoped reset + primitives shared by every component.
+   Every component's outermost element carries class="sh-root".
+   ========================================================================== */
+
+/* ---- scoped reset ------------------------------------------------------- */
+.sh-root, .sh-root *, .sh-root *::before, .sh-root *::after { box-sizing: border-box; }
+
+.sh-root {
+  font-family: var(--font-base);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-gray-800);
+  -webkit-font-smoothing: antialiased;
+}
+.sh-root :where(button) {
+  font: inherit; color: inherit; background: none; border: 0; padding: 0; margin: 0; cursor: pointer;
+}
+.sh-root :where(a) { color: var(--color-blue-700); font-weight: 700; text-decoration: none; }
+.sh-root :where(a):hover { text-decoration: underline; }
+.sh-root :focus-visible {
+  outline: 2px solid var(--color-blue-focus); outline-offset: 2px;
+}
+.sh-root :where(p, h1, h2, h3, h4) { margin: 0; }
+.sh-root :where(ul) { list-style: none; margin: 0; padding: 0; }
+
+/* ---- utilities ---------------------------------------------------------- */
+.sh-visually-hidden, .sh-skip-link:not(:focus) {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+.sh-skip-link:focus { position: absolute; top: 4px; left: 4px; z-index: 2000; background: var(--color-white); padding: 8px 12px; }
+
+/* Visibility helpers — 992px is the site-wide mobile/desktop switch */
+@media (max-width: 991.98px) { .sh-desktop-only { display: none !important; } }
+@media (min-width: 992px)    { .sh-mobile-only  { display: none !important; } }
+
+/* ---- primitives --------------------------------------------------------- */
+.sh-chevron {
+  display: inline-block; width: 7px; height: 7px; margin-left: 4px;
+  border: solid currentColor; border-width: 0 1.5px 1.5px 0;
+  transform: translateY(-3px) rotate(45deg);
+}
+.sh-chevron--blue { color: var(--color-blue-700); }
+
+.sh-status { display: inline-flex; align-items: center; gap: 3px; font-size: 11px; line-height: 1.2; font-weight: 400; color: var(--color-gray-800); white-space: nowrap; }
+.sh-status b { font-weight: 400; }
+.sh-status__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-green-500); flex: none; }
+@media (min-width: 576px) { .sh-status { font-size: 12px; } }
+
+.sh-badge {
+  position: absolute; top: -8px; left: 8px;
+  min-width: 17px; padding: 4px 5px 2px; border-radius: 10px;
+  background: var(--color-orange-500); color: var(--color-white);
+  font-size: 11px; font-weight: 700; line-height: 1; text-align: center;
+}
+@media (min-width: 992px) { .sh-badge { top: -6px; left: 12px; } }
+
+.sh-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 10px 24px; font-size: 11px; font-weight: 700; letter-spacing: .6px;
+  text-transform: uppercase; text-align: center; white-space: nowrap; cursor: pointer;
+}
+.sh-btn.sh-btn--primary { background: var(--color-blue-700); color: var(--color-white) !important; box-shadow: inset 0 -2px 0 rgba(0,0,0,.2); }
+.sh-btn.sh-btn--primary:hover { text-decoration: none !important; background: #066488; }
+
+html.sh-no-scroll, html.sh-no-scroll body { overflow: hidden; }

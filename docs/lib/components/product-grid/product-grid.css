@@ -1,0 +1,9 @@
+/* product-grid · live-site PLP grid. Keeps production's 1600px step (5 columns), so it's exempt from the design-breakpoint check.
+   Prototype code: review and test before using anywhere near production. */
+.sh-product-grid { display: grid; grid-template-columns: minmax(0, 1fr); column-gap: 36px; row-gap: 0; align-items: stretch;
+  padding: 0 16px; margin-bottom: 16px; }
+@media (min-width: 576px) { .sh-product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 26px; } }
+@media (min-width: 768px) { .sh-product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 992px) { .sh-product-grid { padding: 0; } }
+@media (min-width: 1400px) { .sh-product-grid { grid-template-columns: repeat(4, minmax(0, 284px)); column-gap: 40px; justify-content: space-between; } }
+@media (min-width: 1600px) { .sh-product-grid { grid-template-columns: repeat(5, minmax(0, 284px)); column-gap: 32px; } }

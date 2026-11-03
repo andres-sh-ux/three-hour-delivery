@@ -1,0 +1,29 @@
+/* checkout-footer · live-site rebuild of the checkout footer (supplyhouse.com, 2026-11-03)
+   < 768 stacked. 768+ help left, trust badges right.
+   Prototype code: review and test before using anywhere near production. */
+.sh-cof { background: var(--color-white); border-top: 1px solid var(--color-gray-300); }
+.sh-cof__inner { display: flex; flex-direction: column; gap: 20px; max-width: var(--sh-header-max-width); margin: 0 auto; padding: 24px 16px 32px; }
+.sh-cof__help { display: flex; align-items: flex-start; gap: 12px; font-size: 12px; line-height: 17.14px; }
+.sh-cof__avatar { flex: none; width: 40px; height: 40px; border-radius: 50%; }
+.sh-cof__title { margin-bottom: 2px; }
+.sh-cof__title b { margin-right: 4px; font-size: 16px; line-height: 16px; font-weight: 700; }
+.sh-cof__phone { font-size: 11px; }
+.sh-cof__help a { font-weight: 700; color: var(--color-blue-700); }
+.sh-cof__links { display: flex; gap: 6px; }
+.sh-cof__links span { color: var(--color-gray-400); }
+.sh-cof__hours b { font-weight: 700; color: var(--color-blue-700); }
+.sh-cof__trust { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.sh-cof__seal { display: inline-flex; flex-direction: column; justify-content: center; height: 32px; padding: 0 8px; border: 1px solid var(--color-gray-300); border-radius: 3px;
+  font-size: 11px; line-height: 12px; font-weight: 700; color: var(--color-gray-800); }
+.sh-cof__seal small { font-size: 8px; line-height: 10px; font-weight: 400; color: var(--color-gray-700); }
+.sh-cof__secure { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; line-height: 20px; }
+
+@media (min-width: 768px) {
+  .sh-cof__inner { flex-direction: row; align-items: center; justify-content: space-between; padding: 24px; }
+}
+@media (min-width: 992px) {
+  .sh-cof__inner { padding: 24px 32px; }
+}
+@media (min-width: 1400px) {
+  .sh-cof__inner { padding: 24px 80px; }
+}

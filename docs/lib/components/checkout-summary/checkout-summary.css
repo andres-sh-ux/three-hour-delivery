@@ -1,0 +1,47 @@
+/* checkout-summary · live-site rebuild of the checkout Order Summary (supplyhouse.com, 2026-11-03)
+   Sits in .sh-co__summary (checkout-layout), which draws the column's left and right borders at 992+.
+   Three bands, each with a bottom border: totals (padding 28/32/0), TradeMaster savings (80px), Add Promo Code (24/32).
+   Prototype code: review and test before using anywhere near production. */
+.sh-co-summary { font-size: 14px; line-height: 20px; border-top: 1px solid var(--color-gray-300); }
+.sh-co-summary__main { padding: 24px 16px 0; border-bottom: 1px solid var(--color-gray-300); }
+.sh-co-summary__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.sh-co-summary__title { font-size: 20px; line-height: 28.57px; font-weight: 700; }
+.sh-co-summary__toggle { display: inline-flex; align-items: center; gap: 4px; font-size: 14px; line-height: 20px; font-weight: 700; color: var(--color-blue-700); }
+.sh-co-summary__toggle img { width: 12px; height: 8px; }
+.sh-co-summary__toggle[aria-expanded="true"] img { transform: rotate(180deg); }
+.sh-co-summary__items { margin: 0; padding: 4px 0 12px; list-style: none; }
+.sh-co-summary__items[hidden] { display: none; }
+.sh-co-summary__items li { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; }
+.sh-co-summary__rule { margin: 4px 0; border: 0; border-top: 1px solid var(--color-gray-300); }
+.sh-co-summary__rows { display: flex; flex-direction: column; margin: 0; }
+.sh-co-summary__rows dd { margin: 0; font-weight: 700; }
+.sh-co-summary__line { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: 8px 0; }
+.sh-co-summary__method { display: flex; align-items: center; gap: 5px; }
+.sh-co-summary__method img { width: 24px; height: 24px; }
+.sh-co-summary__total { display: flex; justify-content: space-between; align-items: flex-start; margin: 16px 0 24px; font-size: 16px; line-height: 22.86px; font-weight: 700; }
+.sh-co-summary__total strong { font-size: 24px; line-height: 34.29px; }
+.sh-co-summary__savings { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 12px; min-height: 80px; padding: 0 16px;
+  border-bottom: 1px solid var(--color-gray-300); }
+.sh-co-summary__savings a, .sh-co-summary__promo a { font-size: 14px; line-height: 20px; font-weight: 700; color: var(--color-blue-700); }
+.sh-co-summary__tm { display: inline-flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.sh-co-summary__tm-mark { display: block; width: 103px; height: 13px; margin-right: 1px; }
+.sh-co-summary__tm strong { font-size: 16px; line-height: 22.86px; font-weight: 700; color: var(--color-blue-800); }
+.sh-co-summary__promo { padding: 24px 16px; border-bottom: 1px solid var(--color-gray-300); }
+
+/* Review step */
+.sh-co-summary__place { display: none; width: 100%; height: 50px; margin: -10px 0 52px; padding: 8px 16px; background: var(--color-orange-500);
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .2); color: var(--color-white); font-size: 12px; line-height: 12px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; }
+.sh-co-summary__place:hover { background: #d95302; }
+[data-sh-checkout-step="review"] .sh-co-summary__place { display: block; }
+[data-sh-checkout-step="review"] .sh-co-summary__toggle { display: none; }
+[data-sh-checkout-step="review"] .sh-co-summary__total strong { color: var(--color-blue-800); }
+
+@media (min-width: 768px) {
+  .sh-co-summary__main { padding: 24px 24px 0; }
+  .sh-co-summary__savings, .sh-co-summary__promo { padding-left: 24px; padding-right: 24px; }
+}
+@media (min-width: 992px) {
+  .sh-co-summary { border-top: 0; }
+  .sh-co-summary__main { padding: 28px 32px 0; }
+  .sh-co-summary__savings, .sh-co-summary__promo { padding-left: 32px; padding-right: 32px; }
+}

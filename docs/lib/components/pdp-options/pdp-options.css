@@ -1,0 +1,20 @@
+/* pdp-options · live-site rebuild of the PDP variant pills (supplyhouse.com, 2026-10-21).
+   Pill: 14px text on a 14px line, 1px margin + 9px gap. Pill borders are drawn with ::before so the 2px selected border doesn't shift the layout.
+   Prototype code: review and test before using anywhere near production. */
+.sh-pdp-options { margin: 20px 0; }
+.sh-pdp-options__label { display: flex; align-items: baseline; gap: 5px; font-size: 14px; line-height: 20px; }
+.sh-pdp-options__label strong { font-size: 16px; font-weight: 700; }
+.sh-pdp-options__pills { display: flex; flex-wrap: wrap; gap: 9px; padding: 11px 0 15px; }
+.sh-pdp-options__pill { position: relative; display: inline-flex; align-items: center; justify-content: center; min-width: 64px; margin: 1px; padding: 14px 19px 12px;
+  border-radius: 9999px; background: var(--color-white); font-size: 14px; line-height: 14px; font-weight: 700; white-space: nowrap; color: var(--color-gray-800); }
+.sh-pdp-options__pill::before { content: ""; position: absolute; inset: 0; border: 1px solid var(--color-gray-700); border-radius: inherit; pointer-events: none; }
+.sh-pdp-options__pill.is-selected { background: #eff5fd; }
+.sh-pdp-options__pill.is-selected::before { border: 2px solid #066488; }
+.sh-pdp-options__pill.is-unavailable { color: var(--color-gray-500); }
+.sh-pdp-options__pill.is-unavailable::before { border: 1px dashed var(--color-gray-500); }
+.sh-pdp-options__pill:not(.is-selected):hover::before { border-color: var(--color-blue-700); }
+
+/* live: 40px tall pills below 992, 34px from 992 */
+@media (min-width: 992px) {
+  .sh-pdp-options__pill { padding: 11px 19px 9px; }
+}

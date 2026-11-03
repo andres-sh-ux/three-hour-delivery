@@ -1,0 +1,21 @@
+/* cart-trust-bar · live-site rebuild of the strip under the cart (supplyhouse.com, 2026-11-03)
+   < 1200 centered and stacked. 1200+ one row: returns left, payment methods right.
+   Prototype code: review and test before using anywhere near production. */
+.sh-trust { background: var(--color-white); border-top: 1px solid var(--color-gray-300); border-bottom: 1px solid var(--color-gray-300); }
+.sh-trust__inner { display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: var(--sh-header-max-width); margin: 0 auto; padding: 16px; text-align: center; }
+.sh-trust__returns { display: flex; align-items: center; gap: 8px; }
+.sh-trust__returns b { font-size: 16px; line-height: 23px; font-weight: 700; }
+.sh-trust__returns a { display: block; }
+.sh-trust__pay { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.sh-trust__logos { display: flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: 12px 20px; }
+.sh-trust__logos img { display: block; width: auto; }
+.sh-trust__paypal { font-size: 15px; line-height: 20px; font-weight: 700; font-style: italic; color: var(--color-paypal); } /* text stand-in: CDN file name not captured */
+@media (min-width: 1200px) {
+  .sh-trust__inner { flex-direction: row; justify-content: space-between; padding: 16px 24px; text-align: left; }
+  .sh-trust__returns a { display: inline; margin-left: 4px; }
+  .sh-trust__pay { flex-direction: row; gap: 28px; }
+  .sh-trust__logos { gap: 28px; }
+}
+@media (min-width: 1400px) {
+  .sh-trust__inner { padding: 16px 80px; }
+}

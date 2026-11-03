@@ -1,0 +1,65 @@
+/* delivery-slots-modal · live-site rebuild of the "Available Delivery Slots" modal (supplyhouse.com PDP, 2026-10-21).
+   600px dialog from 768; full width with 16px margins below. Slots are 200×72, 13px apart (2 per row below 576).
+   Prototype code: review and test before using anywhere near production. */
+.sh-slots[hidden] { display: none; }
+.sh-slots { position: fixed; inset: 0; z-index: var(--sh-z-drawer); display: flex; align-items: flex-start; justify-content: center; padding: 16px; overflow-y: auto; }
+.sh-slots__overlay { position: fixed; inset: 0; background: rgba(52, 52, 52, .5); }
+.sh-slots__dialog { position: relative; width: 100%; max-width: 600px; border: 1px solid var(--color-gray-300); background: var(--color-white); }
+
+.sh-slots__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 24px 16px;
+  background: var(--color-brown-50); border-bottom: 1px solid var(--color-brown-200); }
+.sh-slots__heading { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; padding-top: 3px; }
+.sh-slots__title { font-size: 20px; line-height: 28px; font-weight: 700; }
+.sh-slots__subtitle { font-size: 16px; line-height: 22.86px; }
+.sh-slots__close { display: flex; align-items: center; justify-content: center; flex: none; width: 20px; height: 34px; }
+.sh-slots__close svg { width: 20px; height: 20px; fill: var(--color-gray-800); }
+
+.sh-slots__body { display: flex; flex-direction: column; align-items: flex-start; padding: 24px 16px; }
+.sh-slots__day { width: 100%; }
+.sh-slots__date { margin-bottom: 4px; font-size: 14px; line-height: 22px; }
+.sh-slots__date--badge { margin-bottom: 16px; }
+.sh-slots__date b { font-weight: 700; }
+.sh-slots__grid { display: flex; flex-wrap: wrap; gap: 13px; margin-bottom: 24px; }
+.sh-slots__slot { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  width: calc(50% - 6.5px); min-height: 72px; padding: 16px 12px 12px; border: 1px solid var(--color-gray-400); }
+.sh-slots__slot b { font-size: 14px; line-height: 22px; font-weight: 700; }
+.sh-slots__slot > span:last-child { font-size: 13px; line-height: 21px; }
+.sh-slots__slot.is-fastest { border-color: var(--color-green-500); }
+.sh-slots__slot.is-available { border-color: var(--color-blue-700); }
+.sh-slots__slot.is-past { color: var(--color-gray-400); }
+.sh-slots__badge { position: absolute; top: -9px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 3px;
+  padding: 3px 12px; border-radius: 12px; background: var(--color-green-500); color: var(--color-white);
+  font-size: 11px; line-height: 15.4px; font-weight: 700; white-space: nowrap; }
+.sh-slots__badge img { display: block; width: 8px; height: 12px; filter: brightness(0) invert(1); }
+
+.sh-slots__how { width: 100%; font-size: 14px; line-height: 22px; }
+.sh-slots__how-title { font-size: 16px; line-height: 26px; font-weight: 700; }
+.sh-slots__ff { display: inline-flex; align-items: center; gap: 2px; vertical-align: top; }
+.sh-slots__ff img { display: block; width: 18px; height: 18px; object-fit: contain; }
+.sh-slots__ff b { font-weight: 700; line-height: 23px; }
+.sh-slots__ff--lg { gap: 6px; }
+.sh-slots__ff--lg img { width: 30px; height: 30px; }
+.sh-slots__ff--lg b { font-size: 16px; line-height: 16px; }
+.sh-slots__note { font-size: 12px; line-height: 17px; }
+.sh-slots__note--first { margin-top: 16px; }
+
+.sh-slots__terms { width: 100%; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--color-gray-250); }
+.sh-slots__terms-row { display: flex; align-items: flex-start; margin-top: 10px; font-size: 14px; line-height: 22px; }
+.sh-slots__terms-row--head { align-items: center; margin-top: 0; }
+.sh-slots__terms-row + .sh-slots__terms-row--head, .sh-slots__terms-row--head + .sh-slots__terms-row { margin-top: 8px; }
+.sh-slots__terms-row > :first-child { flex: 0 0 40%; }
+.sh-slots__terms-row strong { font-weight: 700; }
+.sh-slots__check { font-weight: 700; }
+.sh-slots__check::before { content: "✓"; display: inline-block; width: 10px; margin-right: 5px; font-size: 12px; }
+.sh-slots__fee { font-size: 12px; line-height: 17.14px; font-weight: 700; color: var(--color-yellow-610); }
+.sh-slots__note--weekend { margin-top: 8px; }
+
+@media (min-width: 576px) {
+  .sh-slots__slot { width: 200px; }
+}
+@media (min-width: 768px) {
+  .sh-slots { align-items: center; padding: 32px; }
+  .sh-slots__head { padding: 24px 30px; }
+  .sh-slots__title { font-size: 24px; line-height: 34.29px; }
+  .sh-slots__body { padding: 30px; }
+}

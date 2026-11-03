@@ -1,0 +1,11 @@
+/* checkout-review-payment · live-site rebuild of the Review step payment card (supplyhouse.com, 2026-11-03)
+   Prototype code: review and test before using anywhere near production. */
+.sh-co-pay__card { display: flex; align-items: center; gap: 4px; font-size: 14px; line-height: 20px; }
+.sh-co-pay__card img { width: 44px; height: 16px; margin-right: 4px; object-fit: contain; }
+.sh-co-pay__card b { font-size: 18px; line-height: 25.71px; font-weight: 700; }
+.sh-co-pay__rule { width: 100%; max-width: 284px; margin: 16px 0; border: 0; border-top: 1px solid var(--color-gray-300); }
+.sh-co-pay__alt-title { font-size: 14px; line-height: 20px; font-weight: 700; }
+.sh-co-pay__alt { display: flex; flex-wrap: wrap; align-items: center; column-gap: 4px; font-size: 12px; line-height: 17.14px; }
+.sh-co-pay__ck { font-weight: 700; color: var(--color-blue-800); } /* text stand-in for the Credit Key logo */
+.sh-co-pay__new { padding: 0 4px; border-radius: 2px; background: var(--color-orange-500); font-size: 9px; line-height: 14px; font-weight: 700; text-transform: uppercase; color: var(--color-white); }
+.sh-co-pay__alt a { font-size: 14px; line-height: 20px; font-weight: 700; color: var(--color-blue-700); }

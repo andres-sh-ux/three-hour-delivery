@@ -1,0 +1,15 @@
+/* Maison Neue — copied from core-ui-rc1. Loaded by every component page. */
+@font-face {
+  font-family: "Maison Neue";
+  src: url("fonts/MaisonNeueWEB-Book.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Maison Neue";
+  src: url("fonts/MaisonNeueWEB-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

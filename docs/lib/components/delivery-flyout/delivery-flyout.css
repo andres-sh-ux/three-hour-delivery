@@ -1,0 +1,53 @@
+/* delivery-flyout · live-site rebuild of the header Delivery flyout (supplyhouse.com, signed in, 2026-11-03)
+   520px panel (30px padding, 1px gray border), caret at the top pointing at the trigger. Positioned by delivery-flyout.js.
+   < 576 the panel fills the width (8px margins) and the tiles go two per row.
+   Prototype code: review and test before using anywhere near production. */
+.sh-dflyout[hidden] { display: none; }
+.sh-dflyout { position: absolute; z-index: var(--sh-z-overlay); top: 0; left: 8px; width: calc(100vw - 16px); max-width: 520px;
+  padding: 24px 20px; border: 1px solid var(--color-gray-400); background: var(--color-white); font-size: 14px; line-height: 22px; color: var(--color-gray-800); }
+.sh-dflyout__caret { position: absolute; top: -12px; left: var(--sh-dflyout-caret, 40px); display: block; }
+.sh-dflyout__close { position: absolute; top: 16px; right: 16px; display: flex; padding: 0; }
+.sh-dflyout__close img { width: 13px; height: 13px; }
+
+.sh-dflyout__title { font-size: 16px; line-height: 26px; font-weight: 700; }
+.sh-dflyout__steps { margin: 0; padding: 0; list-style: none; }
+.sh-dflyout__steps img { display: inline-block; width: 18px; height: 18px; margin: 0 2px 0 4px; vertical-align: -3px; }
+.sh-dflyout__steps b { font-weight: 700; }
+.sh-dflyout__fine { font-size: 12px; line-height: 17px; }
+.sh-dflyout__fine--first { margin-top: 16px; }
+.sh-dflyout__rule { margin: 20px 0 0; border: 0; border-top: 1px solid var(--color-gray-250); }
+
+.sh-dflyout__rules { display: grid; grid-template-columns: 150px minmax(0, 1fr); align-items: center; row-gap: 10px; margin-top: 20px; }
+.sh-dflyout__ff { display: flex; align-items: center; gap: 6px; margin-bottom: -2px; }
+.sh-dflyout__ff img { width: 30px; height: 30px; }
+.sh-dflyout__ff b { font-size: 16px; line-height: 16px; font-weight: 700; }
+.sh-dflyout__fee { font-size: 12px; line-height: 17px; font-weight: 700; color: var(--color-yellow-610); }
+.sh-dflyout__cut { font-weight: 700; }
+.sh-dflyout__cut::before { content: ""; display: inline-block; width: 8px; height: 4px; margin: 0 7px 4px 1px; border-left: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-45deg); }
+.sh-dflyout__rules strong { font-weight: 700; }
+.sh-dflyout__weekend { margin-top: 8px; }
+
+.sh-dflyout__more { display: inline-flex; align-items: center; gap: 5px; margin-top: 20px; padding: 0; font-size: 14px; line-height: 20px; font-weight: 700; color: var(--color-blue-700); }
+.sh-dflyout__more[aria-expanded="true"] img { transform: rotate(180deg); }
+.sh-dflyout__slots { margin-top: 18px; }
+.sh-dflyout__date { margin-bottom: 4px; }
+.sh-dflyout__date--badge { margin-bottom: 16px; }
+.sh-dflyout__date b { font-weight: 700; }
+.sh-dflyout__grid { display: flex; flex-wrap: wrap; gap: 13px; }
+.sh-dflyout__grid + .sh-dflyout__date { margin-top: 24px; }
+.sh-dflyout__slot { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  width: calc(50% - 6.5px); min-height: 72px; padding: 16px 12px 12px; border: 1px solid var(--color-blue-700); }
+.sh-dflyout__slot b { font-size: 14px; line-height: 22px; font-weight: 700; }
+.sh-dflyout__slot > span:last-child { font-size: 13px; line-height: 21px; }
+.sh-dflyout__slot.is-fastest { border-color: var(--color-green-500); }
+.sh-dflyout__slot.is-past { border-color: var(--color-gray-400); color: var(--color-gray-400); }
+.sh-dflyout__badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 3px;
+  padding: 3px 12px; border-radius: 12px; background: var(--color-green-500); color: var(--color-white);
+  font-size: 11px; line-height: 15.4px; font-weight: 700; white-space: nowrap; }
+.sh-dflyout__badge img { display: block; width: 8px; height: 12px; filter: brightness(0) invert(1); }
+
+@media (min-width: 576px) {
+  .sh-dflyout { padding: 30px; }
+  .sh-dflyout__rules { grid-template-columns: 183px minmax(0, 1fr); }
+  .sh-dflyout__slot { width: 200px; }
+}

@@ -1,0 +1,33 @@
+/* checkout-review · live-site rebuild of the Review step's first card (supplyhouse.com, 2026-11-03)
+   Rows: label column (160px, 12px gray) + content; < 768 the label sits above the content.
+   Shared with checkout-review-payment: .sh-co-review__card / __row / __label / __content / __edit.
+   Prototype code: review and test before using anywhere near production. */
+.sh-co-review__title { padding: 16px 16px 12px; font-size: 18px; line-height: 25.71px; font-weight: 400; }
+.sh-co-review__card { padding: 0 16px; }
+.sh-co-review__row { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "label label" "content edit";
+  row-gap: 8px; padding: 24px 0; }
+.sh-co-review__row + .sh-co-review__row { border-top: 1px solid var(--color-gray-300); }
+.sh-co-review__label { grid-area: label; font-size: 12px; line-height: 17.14px; font-weight: 400; color: var(--color-gray-700); }
+.sh-co-review__label label { cursor: pointer; }
+.sh-co-review__content { grid-area: content; min-width: 0; }
+.sh-co-review__edit { grid-area: edit; align-self: end; margin-left: 16px; font-size: 14px; line-height: 20px; font-weight: 700; color: var(--color-blue-700); }
+.sh-co-review__address p { font-size: 16px; line-height: 22.86px; }
+.sh-co-review__address p + p { margin-top: 4px; }
+.sh-co-review__po { display: flex; gap: 8px; }
+
+/* Shipping Method inside the review card: no card chrome, details stacked under each name (12px) */
+.sh-co-method--review .sh-co-method__body { padding: 0; background: none; }
+.sh-co-method--review .sh-co-method__sub { display: block; padding-left: 29px; font-size: 12px; line-height: 17.14px; color: var(--color-gray-800); }
+.sh-co-method--review .sh-co-method__line + .sh-co-method__sub { margin-top: 4px; }
+.sh-co-method--review .sh-co-method__option:not(.is-selected) .sh-co-method__sub { color: var(--color-gray-700); }
+.sh-co-method--review .sh-co-method__option .sh-co-method__store { font-weight: 700; color: var(--color-blue-700); }
+
+@media (min-width: 768px) {
+  .sh-co-review__title { padding: 20px 24px 12px; }
+  .sh-co-review__card { padding: 0 24px; }
+  .sh-co-review__row { grid-template-columns: 160px minmax(0, 1fr) auto; grid-template-areas: "label content edit"; row-gap: 0; padding: 28px 0; }
+}
+@media (min-width: 992px) {
+  .sh-co-review__title { padding: 0 0 12px; }
+  .sh-co-review__card { padding: 0 32px; }
+}

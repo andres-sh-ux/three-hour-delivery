@@ -1,0 +1,9 @@
+/* pdp-manuals · live-site rebuild of the PDP manuals block (supplyhouse.com, 2026-10-21).
+   Prototype code: review and test before using anywhere near production. */
+.sh-pdp-manuals__title { margin: 20px 0 10px; font-size: 12px; line-height: 16.8px; font-weight: 700; }
+.sh-pdp-manuals__list { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-bottom: 20px; }
+.sh-pdp-manuals__list a { display: flex; align-items: center; gap: 6px; font-size: 14px; line-height: 19.6px; font-weight: 400; color: var(--color-gray-800); }
+.sh-pdp-manuals__list img { display: block; flex: none; width: 20px; height: 25px; }
+.sh-pdp-manuals__replaces { padding: 28px 0; border-top: 1px solid var(--color-gray-300); border-bottom: 1px solid var(--color-gray-300);
+  font-size: 14px; line-height: 22px; }
+.sh-pdp-manuals__replaces strong { font-size: 16px; font-weight: 700; }

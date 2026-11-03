@@ -1,0 +1,35 @@
+/* cart-layout · live-site rebuild of the Shopping Cart page frame (supplyhouse.com, 2026-11-03)
+   < 992 one column, summary under the main column. 992+ two columns (main + fixed summary width).
+   Prototype code: review and test before using anywhere near production. */
+.sh-cart { background: var(--color-white); }
+.sh-cart__head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  max-width: var(--sh-header-max-width); margin: 0 auto; padding: 16px 16px 12px; background: var(--color-white); }
+.sh-cart__title { font-size: 20px; line-height: 28px; font-weight: 700; }
+.sh-cart__tools { display: flex; align-items: center; }
+.sh-cart__tools a { font-size: 16px; line-height: 23px; }
+.sh-cart__sep { width: 1px; height: 16px; margin: 0 12px; background: var(--color-gray-300); }
+
+.sh-cart__body { display: flex; flex-direction: column; padding: 12px max(0px, (100% - var(--sh-header-max-width)) / 2) 0; background: var(--color-gray-50);
+  border-top: 1px solid var(--color-gray-300); border-bottom: 1px solid var(--color-gray-300); }
+.sh-cart__main { min-width: 0; padding: 0 16px; }
+.sh-cart__summary { min-width: 0; margin-top: 16px; }
+
+@media (min-width: 768px) {
+  .sh-cart__head { padding: 20px 24px 16px; }
+  .sh-cart__main { padding: 0 24px; }
+}
+@media (min-width: 992px) {
+  .sh-cart__head { height: 84px; padding: 28px 32px 20px; } /* live: fixed 84px; the title's 48px line overflows the bottom padding */
+  .sh-cart__title { font-size: 34px; line-height: 48px; }
+  .sh-cart__body { flex-direction: row; align-items: flex-start; padding-top: 16px; padding-bottom: 32px; }
+  .sh-cart__main { flex: 1 1 auto; padding: 0 32px; }
+  .sh-cart__summary { flex: 0 0 340px; margin-top: 0; padding-right: 32px; box-sizing: content-box; }
+}
+@media (min-width: 1200px) {
+  .sh-cart__summary { flex-basis: 400px; }
+}
+@media (min-width: 1400px) {
+  .sh-cart__head { padding: 28px 80px 20px; }
+  .sh-cart__main { padding-left: 80px; }
+  .sh-cart__summary { flex-basis: 440px; padding-right: 80px; }
+}

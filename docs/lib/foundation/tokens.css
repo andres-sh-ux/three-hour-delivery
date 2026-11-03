@@ -1,0 +1,77 @@
+/* ==========================================================================
+   SupplyHouse components — tokens
+   Shared by every component in this library. Values captured from supplyhouse.com. Names follow
+   tier-tokens/tier-1-foundations.tokens.json so they can be swapped for the
+   real token build later. Add new tokens here, never hard-code in a component.
+   ========================================================================== */
+
+:root {
+  /* color — gray */
+  --color-gray-20: #fdfdfd;
+  --color-gray-50: #f8f8f8;
+  --color-gray-250: #e3e3e3; /* product tile divider (not in tier-1) */
+  --color-gray-300: #dcdcdc;
+  --color-gray-400: #c4c4c4;
+  --color-gray-500: #acacac; /* quantity stepper button text (not in tier-1) */
+  --color-gray-600: #969696;
+  --color-gray-700: #757575;
+  --color-gray-800: #343434;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* color — brown */
+  --color-brown-50: #f8f5f3;
+  --color-brown-100: #f0ece8;
+  --color-brown-150: #d6c5b6;
+  --color-brown-200: #c8c4c0;
+  --color-brown-350: #b6afa8; /* disabled switch text on PLP filters (not in tier-1) */
+  --color-brown-500: #89847f;
+  --color-brown-550: #857470;
+  --color-brown-600: #544844;
+  --color-brown-900: #331811;
+
+  /* color — accents */
+  --color-blue-700: #07729c;
+  --color-blue-800: #0066ad;
+  --color-blue-search: #4186ad; /* desktop search button (not in tier-1) */
+  --color-blue-focus: #005fcc;
+  --color-orange-500: #f15c02;
+  --color-green-500: #5e9a41;
+  --color-yellow-600: #b7804e; /* nav hover */
+  --color-yellow-610: #9c6c40; /* "Free shipping" text */
+  --color-green-50: #edf7ee; /* selected delivery time slot at checkout (not in tier-1) */
+  --color-blue-20: #eff8fd; /* completed checkout step (not in tier-1) */
+  --color-blue-25: #eff5fd; /* selected delivery time slot at checkout (not in tier-1) */
+  --color-blue-50: #ecf3f7; /* current checkout step (not in tier-1) */
+  --color-blue-200: #b7d3e1; /* current checkout step outline, estimated from a screenshot (not in tier-1) */
+  --color-yellow-50: #fffce2; /* checkout delivery note background (not in tier-1) */
+  --color-yellow-200: #f7e18c; /* checkout delivery note border (not in tier-1) */
+  --color-paypal: #253b80; /* PayPal text stand-in on the cart trust bar (not in tier-1) */
+
+  /* type */
+  --font-base: "Maison Neue", Helvetica, Arial, sans-serif;
+  --font-script: "Daniel Black", "Maison Neue", sans-serif; /* "We're Here To Help!" — font not bundled */
+
+  /* layout */
+  --sh-max-width: 1968px;
+  --sh-header-max-width: 1920px;
+  --sh-drawer-width: 318px;
+  --sh-z-sticky: 1000;
+  --sh-z-overlay: 1040;
+  --sh-z-drawer: 1200;
+}
+
+/* ---- Breakpoints -----------------------------------------------------------
+   Design breakpoints (the ONLY ones allowed in new components), mobile-first:
+     ≤ 575      default styles, no media query
+     576–767    @media (min-width: 576px)
+     768–991    @media (min-width: 768px)
+     992–1199   @media (min-width: 992px)
+     1200–1399  @media (min-width: 1200px)
+     1400–1920  @media (min-width: 1400px)
+   (CSS variables can't be used inside media queries, so these are written as
+   literals. build.py checks every component against this list.)
+   header / footer / contact-options are maturity "live-site" copies of
+   production and keep production's extra breakpoints (1100, 1240, 1920) —
+   don't copy those into new work.
+   -------------------------------------------------------------------------- */

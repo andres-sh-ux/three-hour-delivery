@@ -1,0 +1,18 @@
+/* checkout-review-items · live-site rebuild of the Review step items card (supplyhouse.com, 2026-11-03)
+   Prototype code: review and test before using anywhere near production. */
+.sh-co-items__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 16px 16px; border-bottom: 1px solid var(--color-gray-300); }
+.sh-co-items__eyebrow { margin-bottom: 4px; font-size: 14px; line-height: 16px; }
+.sh-co-items__date { font-size: 18px; line-height: 25px; font-weight: 700; }
+.sh-co-items__icon { flex: none; width: 30px; height: 30px; }
+.sh-co-items__body { padding: 16px 12px 4px; background: var(--color-gray-20); }
+.sh-co-items__body > .sh-cart-line { margin-bottom: 12px; padding: 16px; border: 1px solid var(--color-gray-300); background: var(--color-white); }
+.sh-co-items .sh-cart-line__later, .sh-co-items .sh-cart-line__sep { display: none; }
+
+@media (min-width: 768px) {
+  .sh-co-items__head { padding: 20px 24px 16px; }
+  .sh-co-items__body { padding: 16px 24px 4px; }
+}
+@media (min-width: 992px) {
+  .sh-co-items__head { padding: 24px 32px 16px; }
+  .sh-co-items__body { padding: 16px 28px 8px; }
+}

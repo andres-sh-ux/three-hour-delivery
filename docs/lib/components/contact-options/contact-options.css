@@ -1,0 +1,28 @@
+/* ==========================================================================
+   Component: contact-options
+   Chat / Call / Text / Email shortcuts with live status. Used inside
+   header (help panel) and footer ("We're Here To Help!").
+   Depends on: foundation/tokens.css, foundation/base.css (.sh-status)
+   ========================================================================== */
+.sh-contact-options { display: flex; justify-content: space-around; align-items: flex-start; }
+.sh-contact-option {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  min-width: 70px; max-width: 70px; margin: 5px 0; color: var(--color-blue-700); text-decoration: none !important;
+}
+.sh-contact-option__icon { width: 26px; height: 26px; margin-bottom: 7px; object-fit: contain; }
+.sh-contact-option__label { font-size: 16px; line-height: 1.2; font-weight: 700; color: var(--color-blue-700); }
+.sh-contact-option__phone { display: none; padding-left: 5px; font-size: 12px; font-weight: 400; color: var(--color-gray-800); }
+.sh-contact-option .sh-status { display: block; margin-top: 2px; white-space: normal; text-align: center; }
+.sh-contact-option .sh-status__dot { display: inline-block; margin-right: 3px; vertical-align: 1px; }
+.sh-status b { white-space: nowrap; }
+.sh-contact-option--row .sh-status { text-align: left; white-space: nowrap; }
+@media (min-width: 576px) {
+  .sh-contact-option { max-width: 120px; margin: 15px 10px; }
+  .sh-contact-option__icon { width: 27px; height: 27px; }
+  .sh-contact-option__phone { display: inline; }
+}
+@media (min-width: 768px) {
+  .sh-contact-option { max-width: none; }
+  .sh-contact-option__label { font-size: 17px; }
+  .sh-contact-option__phone { font-size: 13px; }
+}

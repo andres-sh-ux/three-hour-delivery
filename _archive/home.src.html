@@ -1,0 +1,41 @@
+<!-- sh:title Homepage -->
+<!-- Homepage: signed-in header + hero/account tiles, Reorder, Top Categories, Recently Viewed (rebuilt from supplyhouse.com, 2026-10-21).
+     The rails have no promise line, as on live.
+     Rail items come from js/home.js (the first <li> in each rail is the template). -->
+<!-- sh:component header-signed-in -->
+<!-- sh:component delivery-flyout -->
+<!-- sh:component home-layout -->
+
+<main id="main" class="sh-root sh-home">
+  <!-- sh:component home-hero -->
+  <div class="sh-home__panels">
+    <section class="sh-home-panel" aria-labelledby="home-reorder-title">
+      <div class="sh-home-panel__head">
+        <div class="sh-home-panel__titles"><h2 class="sh-home-panel__title" id="home-reorder-title">Reorder</h2><p class="sh-home-panel__sub">Items you reorder regularly</p></div>
+        <a class="sh-home-panel__all" href="#">View All<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10.12 12.104L8.8 10.787l2-2.003H1.78V7.007h8.81L8.8 5.213l1.32-1.317L14.22 8l-4.1 4.104z"/></svg></a>
+      </div>
+      <!-- sh:component reorder-filters -->
+<!-- sh:component rail -->
+      <li class="sh-rail__item" data-thd-rail="reorder"><!-- sh:component product-card-mini --></li>
+<!-- /sh:component -->
+    </section>
+
+    <section class="sh-home-panel sh-home-panel--bleed" aria-labelledby="home-cats-title">
+      <div class="sh-home-panel__head">
+        <div class="sh-home-panel__titles"><h2 class="sh-home-panel__title" id="home-cats-title">Top Categories</h2><p class="sh-home-panel__sub">Our most-shopped categories</p></div>
+      </div>
+      <!-- sh:component category-circles -->
+    </section>
+
+    <section class="sh-home-panel" aria-labelledby="home-rv-title">
+      <div class="sh-home-panel__head">
+        <div class="sh-home-panel__titles"><h2 class="sh-home-panel__title" id="home-rv-title">Recently Viewed</h2><p class="sh-home-panel__sub">Pick up where you left off</p></div>
+      </div>
+<!-- sh:component rail -->
+      <li class="sh-rail__item" data-thd-rail="recent"><!-- sh:component product-card-mini --></li>
+<!-- /sh:component -->
+    </section>
+  </div>
+</main>
+
+<!-- sh:component footer -->
