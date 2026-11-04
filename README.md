@@ -34,9 +34,7 @@ Home, PLP and PDP pages, `sections/plp-head` and the rail/grid data come from `b
 | Cutoff | Before 4PM (3-Hour) · After 4PM (Early AM) | `cut=before|after` |
 | Time label | Short (Today by 2PM / Tomorrow by 8AM) · Medium (12PM / 10AM) · Long (11:30AM) | `t=short|mid|long` |
 | Chip color | Light · Dark (B only) | `chip=light|dark` |
-| PLP card order | Delivery first · Pickup first | `order=delivery|pickup` |
 | Banner (link only) | Off · On (sample, under the header on signed-in pages) | `banner=off|on` |
-| PLP truck | Off · On (truck icon before the bolt / chip on the product card) | `truck=off|on` |
 | PDP icon (link only) | Truck + bolt · 08 · 04b · 05b (combined icons from Figma, PDP Delivery tile only; `assets/icons/truck-bolt-*.svg`) | `icon=truck|08|04b|05b` |
 
 The panel's Page row moves between pages. Settings live in the link and carry across pages, so the address bar link shares the exact view. `index.html` has preset links.

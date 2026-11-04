@@ -3,16 +3,15 @@
      p = a (current proposal, default) | b (chips everywhere)
      cut = before | after (4PM cutoff)   t = short | mid | long (time label sample)
      chip = light | dark (B only)
-     order = delivery | pickup (which comes first on the product card)   banner = off | on
-     truck = off | on (PLP card: show the truck icon before the bolt / chip)
+     Product cards always show Delivery first and no truck icon (card order / PLP truck switches retired 2026-11-04).
      Link-only (no panel control): banner = off | on, icon = truck | 08 | 04b | 05b (PDP Delivery tile: truck + separate bolt, or a combined truck + bolt icon from Figma)
    Every surface is rebuilt from the state, so switching in the review panel needs no reload.
    Prototype code: review and test before using anywhere near production. */
 (function () {
   "use strict";
   var KEYS = { p: ["a", "b"], cut: ["before", "after"], t: ["short", "mid", "long"],
-               chip: ["light", "dark"], order: ["delivery", "pickup"], banner: ["off", "on"], icon: ["truck", "08", "04b", "05b"], truck: ["off", "on"] };
-  var DEF = { p: "a", cut: "before", t: "short", chip: "light", order: "delivery", banner: "off", icon: "truck", truck: "off" };
+               chip: ["light", "dark"], banner: ["off", "on"], icon: ["truck", "08", "04b", "05b"] };
+  var DEF = { p: "a", cut: "before", t: "short", chip: "light", banner: "off", icon: "truck" };
   var TIMES = { before: { short: "2PM", mid: "12PM", long: "11:30AM" }, after: { short: "8AM", mid: "10AM", long: "11:30AM" } };
   var S, LIB = "lib/";
 
@@ -235,9 +234,7 @@
     ["p", "Proposal", [["b", "Chips"], ["a", "Bolt"]]],
     ["cut", "Cutoff", [["before", "Before 4PM"], ["after", "After 4PM"]]],
     ["t", "Time label", [["short", "Short"], ["mid", "Medium"], ["long", "Long"]]],
-    ["chip", "Chip color", [["light", "Light"], ["dark", "Dark"]]],
-    ["order", "PLP card order", [["delivery", "Delivery first"], ["pickup", "Pickup first"]]],
-    ["truck", "PLP truck", [["off", "Off"], ["on", "On"]]]
+    ["chip", "Chip color", [["light", "Light"], ["dark", "Dark"]]]
   ];
   var PAGES = [["plp", "PLP"], ["pdp", "PDP"], ["cart", "Cart"], ["shipping", "Shipping"], ["review", "Review"]];
   var panel;
