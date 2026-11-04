@@ -10,7 +10,7 @@
     href(".sh-header__logo, .sh-sticky__logo, .sh-coh__logo", "plp.html");
     href(".sh-header__action--cart", "cart.html");
     href(".sh-cats a", "plp.html");
-    go(".sh-pdp-buy__cart", "cart.html");
+    go(".sh-pdp-buy__cart, .sh-psb__cart", "cart.html");
     go(".sh-summary__checkout", "shipping.html");
     go(".sh-co-auth__continue", "review.html");
     href(".sh-co-review__row .sh-co-review__edit", "shipping.html");

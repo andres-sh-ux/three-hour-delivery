@@ -1,0 +1,67 @@
+/* pdp-sticky-bar · live-site rebuild of the PDP sticky product bar (supplyhouse.com, 2026-11-04).
+   Live: fixed, white, 0 2px 4px #d2d2d2 shadow, sits right under the sticky header; 142px at 1200+ (98px product row + 44px tabs), tabs only below.
+   Prototype code: review and test before using anywhere near production. */
+.sh-psb { position: fixed; top: 0; left: 0; right: 0; z-index: calc(var(--sh-z-sticky) - 10); visibility: hidden;
+  background: var(--color-white); box-shadow: 0 2px 4px #d2d2d2; font-size: 14px; line-height: 20px; color: var(--color-gray-800);
+  transition: top .3s ease-in-out; }
+.sh-psb.is-visible { visibility: visible; }
+.sh-psb__inner { display: flex; flex-direction: column; padding: 0 16px; }
+
+/* Product row: 1200+ only */
+.sh-psb__product { display: none; }
+.sh-psb__info { display: flex; min-width: 0; padding-right: 40px; }
+.sh-psb__image { flex: none; width: 68px; height: 68px; margin: 2px 12px 0 0; object-fit: contain; }
+.sh-psb__text { min-width: 0; }
+.sh-psb__title { overflow: hidden; margin: 0; font-size: 20px; line-height: 24px; font-weight: 700; white-space: nowrap; text-overflow: ellipsis; }
+.sh-psb__details { display: flex; align-items: center; gap: 16px; white-space: nowrap; }
+.sh-psb__details a { font-weight: 700; color: var(--color-blue-700); text-decoration: none; }
+.sh-psb__details b { font-weight: 700; }
+.sh-psb__details a b, .sh-psb__rating b { font-size: 13px; color: var(--color-blue-700); }
+.sh-psb__rating { display: inline-flex; align-items: center; gap: 3px; }
+.sh-psb__stars { display: inline-flex; gap: 3px; }
+.sh-psb__stars img { display: block; width: 12px; height: 12px; }
+.sh-psb__promise { display: flex; align-items: center; gap: 3px; margin-top: 11px; font-size: 13px; line-height: 18px; white-space: nowrap; }
+.sh-psb__promise > img { display: block; width: 12px; height: 12px; }
+.sh-psb__promise b { font-weight: 700; }
+.sh-psb__mark { display: inline-flex; align-items: center; margin-left: 4px; }
+.sh-psb__mark[hidden] { display: none; }
+.sh-psb__ff { display: inline-flex; gap: 4px; margin-left: 3px; }
+.sh-psb__ff img { display: block; width: 18px; height: 18px; }
+.sh-psb__total { display: inline-flex; align-items: center; gap: 3px; margin-left: 9px; padding-left: 9px; border-left: 1px solid var(--color-gray-300);
+  font-size: 12px; line-height: 18.2px; color: var(--color-black); }
+.sh-psb__total img { display: block; width: 10px; height: 6px; }
+
+.sh-psb__buy { display: flex; align-items: flex-end; margin-left: auto; padding-top: 6px; }
+.sh-psb__stepper { display: flex; }
+.sh-psb__step { width: 44px; height: 44px; border: 1px solid var(--color-gray-400); background: var(--color-white);
+  font-size: 30px; line-height: 30px; color: var(--color-blue-700); }
+.sh-psb__step--minus { border-radius: 8px 0 0 8px; }
+.sh-psb__step--plus { border-radius: 0 8px 8px 0; }
+.sh-psb__step:disabled { color: var(--color-gray-300); cursor: default; }
+.sh-psb__qty { display: block; margin: 0 -1px; }
+.sh-psb__qty input { display: block; width: 54px; height: 44px; padding: 8px 4px; border: 1px solid var(--color-gray-400); border-radius: 0;
+  font: inherit; font-size: 18px; font-weight: 700; text-align: center; color: var(--color-gray-800); background: var(--color-white); }
+.sh-psb__price { display: flex; flex-direction: column; gap: 2px; align-self: center; margin: 4px 0 0 12px; white-space: nowrap; }
+.sh-psb__price s { font-size: 11px; line-height: 11px; }
+.sh-psb__price strong { font-size: 24px; line-height: 24px; font-weight: 700; color: var(--color-blue-800); }
+.sh-psb__price small { font-size: 11px; }
+.sh-psb__cart { display: flex; align-items: center; justify-content: center; gap: 8px; width: 172px; height: 50px; margin-left: 22px;
+  background: var(--color-orange-500); color: var(--color-white); box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .2);
+  font-size: 13px; line-height: 13px; font-weight: 700; }
+.sh-psb__cart svg { width: 14px; height: 14px; fill: currentColor; }
+
+/* Section tabs */
+.sh-psb__tabs { display: flex; gap: 24px; height: 44px; overflow-x: auto; scrollbar-width: none; }
+.sh-psb__tabs::-webkit-scrollbar { display: none; }
+.sh-psb__tabs a { display: flex; align-items: center; flex: none; border-bottom: 2px solid transparent;
+  font-size: 12px; line-height: 17.14px; color: var(--color-gray-800); text-decoration: none; white-space: nowrap; }
+.sh-psb__tabs a.is-active { border-bottom-color: var(--color-blue-700); font-weight: 700; color: var(--color-blue-700); }
+
+@media (min-width: 768px) { .sh-psb__inner { padding: 0 20px; } }
+@media (min-width: 992px) { .sh-psb__inner { padding: 0 32px; } }
+@media (min-width: 1200px) {
+  .sh-psb__inner { padding: 0 52px; }
+  .sh-psb__product { display: flex; align-items: flex-start; height: 98px; padding: 12px 0; }
+  .sh-psb__tabs { border-top: 1px solid var(--color-gray-300); }
+}
+@media (min-width: 1400px) { .sh-psb__inner { padding: 0 80px; } }

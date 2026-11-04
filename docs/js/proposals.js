@@ -67,10 +67,10 @@
     if (dates[0]) dates[0].innerHTML = "<b>" + d.day + ",</b> " + d.dateLong;
     if (dates[1]) dates[1].innerHTML = s.cut === "before" ? "<b>Tomorrow,</b> November 4" : "Thu, November 5";
     var fast = SH.$(".sh-dflyout__slot.is-fastest", f);
-    if (fast) SH.$("b", fast).textContent = "Get by " + d.T;
+    if (fast) SH.$("b", fast).textContent = "By " + d.T;
     badge(SH.$('[data-sh-dflyout="badge"]', f), s, d);
     var first = grids[0] ? SH.$$(".sh-dflyout__slot", grids[0]) : [];
-    if (first[1]) first[1].hidden = s.cut === "after";   // after the cutoff "Get by 8AM" replaces the 8AM - 12PM window
+    if (first[1]) first[1].hidden = s.cut === "after";   // after the cutoff "By 8AM" replaces the 8AM - 12PM window
     var second = grids[1] ? SH.$$(".sh-dflyout__slot", grids[1]) : [];
     if (second[0] && !second[1]) { var c = second[0].cloneNode(true); SH.$("b", c).textContent = "1PM - 4PM"; grids[1].appendChild(c); }
   }
@@ -81,7 +81,7 @@
     if (dates[0]) dates[0].innerHTML = "<b>" + d.day + ",</b> " + d.dateLong;
     if (dates[1]) dates[1].innerHTML = s.cut === "before" ? "<b>Tomorrow,</b> November 4" : "Thu, November 5";
     var fast = SH.$(".sh-slots__slot.is-fastest", m);
-    if (fast) SH.$("b", fast).textContent = "Get by " + d.T;
+    if (fast) SH.$("b", fast).textContent = "By " + d.T;
     badge(SH.$('[data-sh-slots="badge"]', m), s, d);
     var grid = SH.$(".sh-slots__grid", m), first = grid ? SH.$$(".sh-slots__slot", grid) : [];
     if (first[1]) first[1].hidden = s.cut === "after";
@@ -138,13 +138,21 @@
       var combined = s.p !== "live" && s.icon !== "truck";
       ic.setAttribute("src", combined ? "assets/icons/truck-bolt-" + s.icon + ".svg" : ic.getAttribute("data-thd-src"));
       ic.classList.toggle("thd-combined", combined); ic.classList.toggle("thd-combined--wide", combined && s.icon !== "08");
-      SH.$(".thd-iconrow__mark", row).innerHTML = combined ? mark(s, d, false).replace(/<img class="thd-bolt"[^>]*>/, "") : mark(s, d, false);
+      SH.$(".thd-iconrow__mark", row).innerHTML = "";
       var badgeEl = SH.$(".sh-pdp-buy__badge", tile), when = SH.$(".thd-when", tile);
       if (!when) { when = document.createElement("div"); when.className = "sh-pdp-buy__tile-when thd-when"; tile.appendChild(when); }
       when.innerHTML = "<b>" + d.when + "</b>";
+      // 3-Hour / Early AM label sits under the delivery time (with a combined icon it drops its own bolt)
+      var pm = SH.$(".thd-pdp-mark", tile);
+      if (!pm) { pm = document.createElement("div"); pm.className = "thd-pdp-mark"; when.insertAdjacentElement("afterend", pm); }
+      pm.innerHTML = combined ? mark(s, d, false).replace(/<img class="thd-bolt"[^>]*>/, "") : mark(s, d, false);
+      pm.hidden = s.p === "live";
       set('[data-sh-pdp="badge-label"]', d.when, tile);
       if (badgeEl) badgeEl.hidden = s.p !== "live"; when.hidden = s.p === "live";
     }
+    // PDP sticky bar: same date, and the 3-Hour / Early AM label right after it
+    var psb = SH.$("[data-sh-psb]");
+    if (psb) { set('[data-sh-psb="date"]', d.when, psb); var pm2 = SH.$('[data-sh-psb="mark"]', psb); pm2.innerHTML = mark(s, d, false); pm2.hidden = s.p === "live"; }
     var ship = SH.$('.sh-pdp-buy__tile[data-sh-ff="ship"] .sh-pdp-buy__tile-when'); if (ship) ship.innerHTML = "<b>" + d.shipShort + "</b>";
     var pt = SH.$('.sh-pdp-buy__tile[data-sh-ff="pickup"]');
     if (pt) { set(".sh-pdp-buy__tile-qty", s.cut === "before" ? "621 in" : "621", pt); var pw = SH.$(".sh-pdp-buy__tile-when", pt); if (pw) pw.innerHTML = "<b>" + (s.cut === "before" ? "1 Hour" : "Tomorrow") + "</b>"; }
@@ -174,7 +182,7 @@
       if (days[0]) days[0].textContent = d.day; if (days[1]) days[1].textContent = d.next === "Thu" ? "Thu, Nov 5" : "Tomorrow";
       var blocks = SH.$$(".sh-co-method__dayblock", root), t0 = blocks[0] ? SH.$$(".sh-co-slot", blocks[0]) : [], t1 = blocks[1] ? SH.$$(".sh-co-slot", blocks[1]) : [];
       var dayFull = s.cut === "before" ? "Today, Nov 3" : "Tomorrow, Nov 4", nextFull = s.cut === "before" ? "Tomorrow, Nov 4" : "Thu, Nov 5";
-      if (t0[0]) { SH.$("b", t0[0]).textContent = "Get by " + d.T; t0[0].setAttribute("data-sh-when", d.full); }
+      if (t0[0]) { SH.$("b", t0[0]).textContent = "By " + d.T; t0[0].setAttribute("data-sh-when", d.full); }
       if (t0[1]) { t0[1].setAttribute("data-sh-when", dayFull + " by 12PM"); t0[1].hidden = s.cut === "after"; }
       if (t0[2]) t0[2].setAttribute("data-sh-when", dayFull + " by 4PM");
       if (t1[0]) t1[0].setAttribute("data-sh-when", nextFull + " by 12PM");

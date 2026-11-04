@@ -47,6 +47,12 @@ img.thd-bolt { width: 8px !important; height: 12px !important; }   /* beat compo
 .thd-iconrow img.thd-combined--wide ~ .thd-iconrow__mark { margin-top: 5px; }
 .thd-iconrow img.thd-combined { width: 30px; height: 26.25px; }   /* 08: viewBox 24 × 21 at the truck's 1.25 scale (bolt rises above the roof) */
 .thd-iconrow img.thd-combined--wide { width: 32.5px; height: 25px; }   /* 04b / 05b: 26 × 20 (badge overhangs the truck) */
+.sh-psb__mark { --thd-fs: 13px; --thd-cfs: 11px; }
+/* Sticky bar: the 3-Hour / Early AM label replaces the truck icon */
+:is(.thd-p-a, .thd-p-b) .sh-psb [data-sh-psb-ff="delivery"] { display: none; }
+.thd-pdp-mark { margin-top: 6px; --thd-fs: 13px; --thd-cfs: 11px; }
+/* Review step: the selected slot already shows the time, so Delivery drops its date while selected */
+[data-sh-checkout-step="review"] [data-sh-co-option="delivery"].is-selected :is(.sh-co-method__when, [data-sh-co="when"]) { display: none; }
 .thd-iconrow { min-height: 30px; display: flex; align-items: center; gap: 4px; --thd-fs: 13px; --thd-cfs: 11px; }
 .sh-ta__mark { --thd-fs: 13px; --thd-cfs: 11px; }
 .sh-cart-shipment__mark { --thd-fs: 13px; --thd-cfs: 11px; margin-left: 2px; }
