@@ -169,7 +169,7 @@
       var slotSel = SH.$(".sh-co-slot.is-selected", root), fastSel = !slotSel || slotSel.classList.contains("is-fastest");
       if (del) { if (fastSel) del.setAttribute("data-sh-arrives", d.full); }
       if (fastSel) set('[data-sh-co="when"]', d.full, root);
-      var m = SH.$('[data-sh-co="mark"]', root); if (m) { m.innerHTML = s.p === "b" ? mark(s, d, false) : ""; m.hidden = s.p !== "b"; }
+      var m = SH.$('[data-sh-co="mark"]', root); if (m) { m.innerHTML = ""; m.hidden = true; }   // no chip by the Delivery title: the time slot carries it
       var days = SH.$$(".sh-co-method__day", root);
       if (days[0]) days[0].textContent = d.day; if (days[1]) days[1].textContent = d.next === "Thu" ? "Thu, Nov 5" : "Tomorrow";
       var blocks = SH.$$(".sh-co-method__dayblock", root), t0 = blocks[0] ? SH.$$(".sh-co-slot", blocks[0]) : [], t1 = blocks[1] ? SH.$$(".sh-co-slot", blocks[1]) : [];
@@ -270,6 +270,8 @@
   SH.onReady(function () {
     var probe = SH.$('img[src*="assets/icons/"]'); if (probe) LIB = probe.getAttribute("src").split("assets/icons/")[0];
     S = read();
+    // Checkout opens with no time slot selected (the live site preselects the fastest one).
+    SH.$$("[data-sh-co-method] .sh-co-slot.is-selected").forEach(function (b) { b.classList.remove("is-selected"); b.setAttribute("aria-pressed", "false"); });
     if (!SH.$(".thd-launcher")) buildPanel();
     document.addEventListener("click", function (e) {
       var cta = e.target.closest && e.target.closest("[data-thd-banner-cta]"); if (!cta) return;
