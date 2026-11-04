@@ -51,8 +51,8 @@ img.thd-bolt { width: 8px !important; height: 12px !important; }   /* beat compo
 /* Sticky bar: the 3-Hour / Early AM label replaces the truck icon */
 :is(.thd-p-a, .thd-p-b) .sh-psb [data-sh-psb-ff="delivery"] { display: none; }
 .thd-pdp-mark { margin-top: 6px; --thd-fs: 13px; --thd-cfs: 11px; }
-/* Review step: the selected slot already shows the time, so Delivery drops its date while selected */
-[data-sh-checkout-step="review"] [data-sh-co-option="delivery"].is-selected :is(.sh-co-method__when, [data-sh-co="when"]) { display: none; }
+/* Shipping + Review: the time slots already show the time, so Delivery drops its date while selected (shows again when Ship / Pickup is picked) */
+[data-sh-checkout-step] [data-sh-co-option="delivery"].is-selected :is(.sh-co-method__when, [data-sh-co="when"]) { display: none; }
 .thd-iconrow { min-height: 30px; display: flex; align-items: center; gap: 4px; --thd-fs: 13px; --thd-cfs: 11px; }
 .sh-ta__mark { --thd-fs: 13px; --thd-cfs: 11px; }
 .sh-cart-shipment__mark { --thd-fs: 13px; --thd-cfs: 11px; margin-left: 2px; }
