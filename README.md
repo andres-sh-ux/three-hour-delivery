@@ -18,7 +18,7 @@ A prototype built with the **sh-components** library (`../sh-components`): the s
 | `js/flow.js` | Links the pages: logo → PLP, category circles → PLP, product → PDP, cart icon / Add to Cart → Cart, Secure Checkout → Shipping, CONTINUE → Review |
 | `sections/plp-head` | PLP header (breadcrumb, title, help block, sort), pasted into `pages/plp.html` |
 | `css/project.css` | PLP column layout and the launcher |
-| `js/proposals.js`, `css/proposals.css` | Proposals (Chips / Bolt), review panel, banner, product card tooltip |
+| `js/proposals.js`, `css/proposals.css` | Chips proposal, review panel, banner, product card tooltip |
 
 Home, PLP and PDP pages, `sections/plp-head` and the rail/grid data come from `brand-test` (without its variant switcher).
 
@@ -30,7 +30,6 @@ Home, PLP and PDP pages, `sections/plp-head` and the rail/grid data come from `b
 
 | Switch | Options | Link param |
 |---|---|---|
-| Proposal | Chips (chips everywhere except top nav) · Bolt (exec deck MVP; chips only on time slots) | `p=b|a` |
 | Cutoff | Before 4PM (3-Hour) · After 4PM (Early AM) | `cut=before|after` |
 | Time label | Short (Today by 2PM / Tomorrow by 8AM) · Medium (12PM / 10AM) · Long (11:30AM) | `t=short|mid|long` |
 | Chip color | Light · Dark (B only) | `chip=light|dark` |
@@ -39,8 +38,8 @@ Home, PLP and PDP pages, `sections/plp-head` and the rail/grid data come from `b
 
 The panel's Page row moves between pages. Settings live in the link and carry across pages, so the address bar link shares the exact view. `index.html` has preset links.
 A selected fastest time slot always shows the dark green badge.
-Bolt (`p=a`): plain bolt + "3-Hour" / "Early AM" ("… Delivery" where the word isn't nearby), chips only on time slots (light).
-Chips (`p=b`): the same marks as chips everywhere except the top bar, which always shows the plain bolt + text ( product card, PDP tile, Total Available, cart, checkout), light or dark.
+Bolt (`p=a`, retired; links fall back to Chips): plain bolt + "3-Hour" / "Early AM" ("… Delivery" where the word isn't nearby), chips only on time slots (light).
+Chips (the only proposal): the same marks as chips everywhere except the top bar, which always shows the plain bolt + text ( product card, PDP tile, Total Available, cart, checkout), light or dark.
 Surfaces: header top bar + Delivery flyout, PLP card (+ hover tooltip), PDP tiles + See Time Slots + Total Available, cart, checkout Shipping + Review.
 
 ## Proposal hooks (library)

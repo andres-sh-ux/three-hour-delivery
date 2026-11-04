@@ -9,9 +9,10 @@
    Prototype code: review and test before using anywhere near production. */
 (function () {
   "use strict";
-  var KEYS = { p: ["a", "b"], cut: ["before", "after"], t: ["short", "mid", "long"],
+  // Chips is the only proposal now (Bolt retired 2026-11-04); p=a links fall back to Chips. The Bolt code stays for reference.
+  var KEYS = { p: ["b"], cut: ["before", "after"], t: ["short", "mid", "long"],
                chip: ["light", "dark"], banner: ["off", "on"], icon: ["truck", "08", "04b", "05b"] };
-  var DEF = { p: "a", cut: "before", t: "short", chip: "light", banner: "off", icon: "truck" };
+  var DEF = { p: "b", cut: "before", t: "short", chip: "light", banner: "off", icon: "truck" };
   var TIMES = { before: { short: "2PM", mid: "12PM", long: "11:30AM" }, after: { short: "8AM", mid: "10AM", long: "11:30AM" } };
   var S, LIB = "lib/";
 
@@ -231,7 +232,6 @@
 
   /* ---- Review panel ---- */
   var ROWS = [
-    ["p", "Proposal", [["b", "Chips"], ["a", "Bolt"]]],
     ["cut", "Cutoff", [["before", "Before 4PM"], ["after", "After 4PM"]]],
     ["t", "Time label", [["short", "Short"], ["mid", "Medium"], ["long", "Long"]]],
     ["chip", "Chip color", [["light", "Light"], ["dark", "Dark"]]]
