@@ -10,9 +10,9 @@
 (function () {
   "use strict";
   // Chips is the only proposal now (Bolt retired 2026-11-04); p=a links fall back to Chips. The Bolt code stays for reference.
-  var KEYS = { p: ["b"], cut: ["before", "after"], t: ["short", "mid", "long"],
+  var KEYS = { p: ["b"], shape: ["pill", "rounded", "tag", "bar"], cut: ["before", "after"], t: ["short", "mid", "long"],
                chip: ["light", "dark"], banner: ["off", "on"], icon: ["truck", "08", "04b", "05b"] };
-  var DEF = { p: "b", cut: "before", t: "short", chip: "light", banner: "off", icon: "truck" };
+  var DEF = { p: "b", shape: "pill", cut: "before", t: "short", chip: "light", banner: "off", icon: "truck" };
   var TIMES = { before: { short: "2PM", mid: "12PM", long: "11:30AM" }, after: { short: "8AM", mid: "10AM", long: "11:30AM" } };
   var S, LIB = "lib/";
 
@@ -33,7 +33,7 @@
       day: b ? "Today" : "Tomorrow", date: b ? "Nov 3" : "Nov 4", dateLong: b ? "November 3" : "November 4",
       next: b ? "Tomorrow" : "Thu", nextDate: b ? "Nov 4" : "Nov 5", nextLong: b ? "November 4" : "November 5",
       when: (b ? "Today" : "Tomorrow") + " by " + T,
-      full: (b ? "Today, Nov 3" : "Tomorrow, Nov 4") + " by " + T,
+      full: (b ? "Today" : "Tomorrow") + " by " + T,   // same wording everywhere (no date)
       pickupWhen: b ? "in 1 Hour" : "Tomorrow", pickupArr: b ? "Ready in 1 Hour" : "Ready Tomorrow",
       shipFull: b ? "Tomorrow, Nov 4" : "Thu, Nov 5", shipShort: b ? "Tomorrow" : "Thu, Nov 5"
     };
@@ -43,7 +43,7 @@
   function mark(s, d, withDelivery, cls) {
     if (s.p === "live") return "";
     var c = cls ? " " + cls : "";
-    if (s.p === "b") return '<span class="thd-chip' + c + '">' + BOLT() + d.label + "</span>" + (withDelivery ? '<span class="thd-word">Delivery</span>' : "");
+    if (s.p === "b") return '<span class="thd-chip' + c + '"><span class="thd-boltbox">' + BOLT() + '</span>' + d.label + "</span>" + (withDelivery ? '<span class="thd-word">Delivery</span>' : "");
     return '<span class="thd-mark' + c + '">' + BOLT() + d.label + (withDelivery ? " Delivery" : "") + "</span>";
   }
   function set(sel, text, root) { SH.$$(sel, root).forEach(function (el) { el.textContent = text; }); }
@@ -95,7 +95,7 @@
       var item = SH.$('.sh-product-card__ff-item[data-sh-ff="delivery"]', card); if (!item) return;
       item.innerHTML = s.p === "live" ? TRUCK() + '<span class="sh-product-card__ff-label" data-sh-ff-label>Delivery</span>'
                                        : '<span class="thd-ff">' + (s.p === "b"
-                                           ? '<span class="thd-chip">' + (s.truck === "on" ? '<img class="thd-ff__truck" src="' + LIB + 'assets/icons/delivery.svg" alt="" width="16" height="16">' : "") + BOLT() + d.label + " Delivery</span>"   // B: truck sits inside the chip
+                                           ? '<span class="thd-chip">' + (s.truck === "on" ? '<img class="thd-ff__truck" src="' + LIB + 'assets/icons/delivery.svg" alt="" width="16" height="16">' : "") + '<span class="thd-boltbox">' + BOLT() + '</span>' + d.label + " Delivery</span>"   // B: truck sits inside the chip
                                            : (s.truck === "on" ? '<img class="thd-ff__truck" src="' + LIB + 'assets/icons/delivery.svg" alt="" width="18" height="18">' : "") + mark(s, d, true)) + "</span>";   // B on the card: one chip, "3-Hour Delivery" / "Early AM Delivery" 
       item.classList.toggle("thd-tip-on", s.p !== "live");
     });
@@ -165,12 +165,22 @@
     if (opt("delivery")) opt("delivery").setAttribute("data-sh-arrives", d.full);
     if (opt("ship")) { opt("ship").setAttribute("data-sh-arrives", d.shipFull); set(".sh-cart-shipment__when", d.shipFull, opt("ship")); }
     if (opt("pickup")) { opt("pickup").setAttribute("data-sh-arrives", d.pickupArr); set(".sh-cart-shipment__when", d.pickupWhen, opt("pickup")); }
-    set('[data-sh-cart="when"]', d.full, root);
+    var cw = SH.$('[data-sh-cart="when"]', root);
+    if (cw) cw.innerHTML = '<span>' + d.full + '</span>' + (s.p === "live" ? "" : '<span class="thd-cart-mark">' + mark(s, d, false) + '</span>');
     var sel = SH.$(".sh-cart-shipment__option.is-selected", root); if (sel) set('[data-sh-cart="arriving"]', sel.getAttribute("data-sh-arrives"), root);
-    var m = SH.$('[data-sh-cart="mark"]', root); if (m) { m.innerHTML = mark(s, d, false); m.hidden = s.p === "live"; }
+    var m = SH.$('[data-sh-cart="mark"]', root); if (m) { m.innerHTML = ""; m.hidden = true; }   // chip moved next to the time
   }
 
   /* ---- Checkout: Shipping + Review ---- */
+  // Delivery not selected (Shipping + Review): the chip sits next to its date, only while that date is the fastest slot's
+  function whenMarks(root, s, d) {
+    var del = SH.$('[data-sh-co-option="delivery"]', root); if (!del) return;
+    var host = SH.$(".sh-co-method__when", del) || SH.$('[data-sh-co="when"]', del); if (!host) return;
+    var m = SH.$(".thd-co-when-mark", host);
+    if (!m) { m = document.createElement("span"); m.className = "thd-co-when-mark"; host.appendChild(m); }
+    m.innerHTML = mark(s, d, false);
+    m.hidden = s.p === "live" || root.getAttribute("data-thd-fast") === "no";
+  }
   function checkout(s, d) {
     SH.$$("[data-sh-co-method]").forEach(function (root) {
       var del = SH.$('[data-sh-co-option="delivery"]', root);
@@ -181,12 +191,13 @@
       var days = SH.$$(".sh-co-method__day", root);
       if (days[0]) days[0].textContent = d.day; if (days[1]) days[1].textContent = d.next === "Thu" ? "Thu, Nov 5" : "Tomorrow";
       var blocks = SH.$$(".sh-co-method__dayblock", root), t0 = blocks[0] ? SH.$$(".sh-co-slot", blocks[0]) : [], t1 = blocks[1] ? SH.$$(".sh-co-slot", blocks[1]) : [];
-      var dayFull = s.cut === "before" ? "Today, Nov 3" : "Tomorrow, Nov 4", nextFull = s.cut === "before" ? "Tomorrow, Nov 4" : "Thu, Nov 5";
+      var dayFull = s.cut === "before" ? "Today" : "Tomorrow", nextFull = s.cut === "before" ? "Tomorrow" : "Thu, Nov 5";
       if (t0[0]) { SH.$("b", t0[0]).textContent = "By " + d.T; t0[0].setAttribute("data-sh-when", d.full); }
       if (t0[1]) { t0[1].setAttribute("data-sh-when", dayFull + " by 12PM"); t0[1].hidden = s.cut === "after"; }
       if (t0[2]) t0[2].setAttribute("data-sh-when", dayFull + " by 4PM");
       if (t1[0]) t1[0].setAttribute("data-sh-when", nextFull + " by 12PM");
       badge(SH.$('[data-sh-co="badge"]', root), s, d);
+      whenMarks(root, s, d);
       var ship = SH.$('[data-sh-co-option="ship"]', root), pick = SH.$('[data-sh-co-option="pickup"]', root);
       if (ship) { ship.setAttribute("data-sh-arrives", d.shipFull); var sw = SH.$(".sh-co-method__when", ship); if (sw) sw.textContent = "- " + d.shipFull; var ss = SH.$(".sh-co-method__sub", ship); if (ss) ss.textContent = d.shipFull; }
       if (pick) {
@@ -195,6 +206,8 @@
         var ps = SH.$(".sh-co-method__sub", pick); if (ps) ps.textContent = d.pickupWhen;
       }
     });
+    // Checkout (Shipping + Review): "FREE over $500" on its own line, no "Order today." and no parentheses
+    SH.$$(".sh-co-method__sub, .sh-co-method__note").forEach(function (el) { if (/FREE over/.test(el.textContent)) el.textContent = el.textContent.replace(/^Order today\.\s*/, "").replace(/^\((FREE over [^)]*)\)$/, "$1"); });
     var items = SH.$('[data-sh-co-items="arriving"]'), delSel = SH.$('[data-sh-co-option="delivery"].is-selected');
     if (items && delSel) items.textContent = delSel.getAttribute("data-sh-arrives");
   }
@@ -224,6 +237,7 @@
     var d = data(S), html = document.documentElement;
     ["a", "b", "live"].forEach(function (p) { html.classList.toggle("thd-p-" + p, S.p === p); });
     html.classList.toggle("thd-chip-dark", S.p === "b" && S.chip === "dark");
+    KEYS.shape.forEach(function (k) { html.classList.toggle("thd-shape-" + k, S.shape === k); });   // chip shape (time-slot badges keep the pill)
     html.classList.toggle("thd-order-pickup", S.order === "pickup");
     [header, flyout, slotsModal, totalAvail, cards, tooltip, pdp, cart, checkout, banner].forEach(function (fn) { try { fn(S, d); } catch (e) { if (window.console) console.warn("proposals:", fn.name, e); } });
     carry(S);
@@ -234,7 +248,8 @@
   var ROWS = [
     ["cut", "Cutoff", [["before", "Before 4PM"], ["after", "After 4PM"]]],
     ["t", "Time label", [["short", "Short"], ["mid", "Medium"], ["long", "Long"]]],
-    ["chip", "Chip color", [["light", "Light"], ["dark", "Dark"]]]
+    ["chip", "Chip color", [["light", "Light"], ["dark", "Dark"]]],
+    ["shape", "Chip shape", [["pill", "Pill"], ["rounded", "Square"], ["tag", "Tag"], ["bar", "Bar"]]]
   ];
   var PAGES = [["plp", "PLP"], ["pdp", "PDP"], ["cart", "Cart"], ["shipping", "Shipping"], ["review", "Review"]];
   var panel;
@@ -278,6 +293,9 @@
     // Checkout opens with no time slot selected (the live site preselects the fastest one).
     SH.$$("[data-sh-co-method] .sh-co-slot.is-selected").forEach(function (b) { b.classList.remove("is-selected"); b.setAttribute("aria-pressed", "false"); });
     if (!SH.$(".thd-launcher")) buildPanel();
+    document.addEventListener("sh:checkout-slot", function (e) {
+      setTimeout(function () { SH.$$("[data-sh-co-method]").forEach(function (root) { root.setAttribute("data-thd-fast", e.detail && e.detail.fastest ? "yes" : "no"); whenMarks(root, S, data(S)); }); }, 0);
+    });
     document.addEventListener("click", function (e) {
       var cta = e.target.closest && e.target.closest("[data-thd-banner-cta]"); if (!cta) return;
       e.preventDefault(); e.stopPropagation(); var t = SH.$("[data-sh-dflyout-open]"); if (t) { window.scrollTo(0, 0); t.click(); }
