@@ -105,7 +105,9 @@
                                        : '<span class="thd-ff">' + (s.p === "b"
                                            ? '<span class="thd-chip">' + (s.truck === "on" ? '<img class="thd-ff__truck" src="' + LIB + 'assets/icons/delivery.svg" alt="" width="16" height="16">' : "") + '<span class="thd-boltbox">' + BOLT() + '</span>' + d.label + " Delivery</span>"   // B: truck sits inside the chip
                                            : (s.truck === "on" ? '<img class="thd-ff__truck" src="' + LIB + 'assets/icons/delivery.svg" alt="" width="18" height="18">' : "") + mark(s, d, true)) + "</span>";   // B on the card: one chip, "3-Hour Delivery" / "Early AM Delivery" 
-      item.classList.toggle("thd-tip-on", s.p !== "live" && d.fast);
+      item.classList.add("thd-tip-on"); item.setAttribute("data-thd-tip", "delivery");   // weekend: the live "Next Day Delivery" tooltip
+      var pk = SH.$('.sh-product-card__ff-item[data-sh-ff="pickup"]', card);
+      if (pk) { pk.classList.add("thd-tip-on"); pk.setAttribute("data-thd-tip", "pickup"); }
     });
   }
   var tip;
@@ -114,6 +116,8 @@
       tip = document.createElement("div"); tip.className = "sh-root thd-tip"; tip.setAttribute("role", "tooltip"); tip.hidden = true; document.body.appendChild(tip);
       function show(e) {
         var it = e.target.closest && e.target.closest(".thd-tip-on"); if (!it) return;
+        var kind = it.getAttribute("data-thd-tip") || "delivery";
+        tip.innerHTML = tipHTML(kind, tipD); tip.classList.toggle("thd-tip--pickup", kind === "pickup");
         var r = it.getBoundingClientRect(); tip.hidden = false;
         var w = tip.offsetWidth, x = Math.max(8, Math.min(r.left + r.width / 2 - w / 2, document.documentElement.clientWidth - w - 8));
         tip.style.left = (x + window.scrollX) + "px"; tip.style.top = (r.bottom + window.scrollY + 12) + "px";   // below the element, as on the live site
@@ -123,7 +127,17 @@
       document.addEventListener("mouseover", show); document.addEventListener("focusin", show);
       document.addEventListener("mouseout", hide); document.addEventListener("focusout", hide);
     }
-    tip.innerHTML = '<p class="thd-tip__title">' + BOLT() + d.label + " Delivery</p>" +
+    tipD = d;
+  }
+  // Tooltip copy follows the live PLP: Delivery (3-Hour / Early AM, or the live "Next Day Delivery" on weekends) and Pickup
+  var tipD;
+  function tipHTML(kind, d) {
+    var ic = function (n) { return '<img class="thd-tip__icon" src="' + LIB + 'assets/icons/' + n + '.svg" alt="" width="24" height="24">'; };
+    if (kind === "pickup") return '<p class="thd-tip__title">' + ic("pickup") + "Pickup " + d.pickupWhen + "</p>" +
+      '<p class="thd-tip__k">Pickup Location:</p><p>30 Apple Orchard Drive, Suite 1<br>Dayton, NJ, 08810</p><p class="thd-tip__link">View in Google Maps</p>' +
+      '<p class="thd-tip__k thd-tip__gap">Pickup Hours:</p><p>Mon\u2013Fri: 7AM\u20136PM | Sat: 9AM\u20131PM</p>';
+    if (!d.fast) return '<p class="thd-tip__title">' + ic("delivery") + "Next Day Delivery</p><p>$29 (FREE on orders over $500) or FREE UPS Shipping</p>";
+    return '<p class="thd-tip__title">' + BOLT() + d.label + " Delivery</p>" +
       "<p>Order now, get it <b>" + d.when + "</b></p><p>Choose your delivery window at checkout</p><p>$29 (FREE on orders over $500)</p>";
   }
 

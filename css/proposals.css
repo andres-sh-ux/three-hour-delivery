@@ -123,3 +123,11 @@ img.thd-bolt { width: 8px !important; height: 12px !important; }   /* beat compo
 .thd-cut-weekend :is(.sh-co-slot, .sh-dflyout__slot).is-fastest { border-color: var(--color-blue-700); }
 .thd-cut-weekend .sh-slots__slot.is-fastest { border-color: var(--color-gray-400); }
 .thd-cut-weekend .sh-co-slot.is-fastest.is-selected { background: var(--color-blue-25); box-shadow: inset 0 0 0 2px var(--color-blue-700); }
+
+/* Tooltips (PLP): Pickup and the weekend "Next Day Delivery" follow the live site */
+.thd-tip__icon { flex: none; width: 24px; height: 24px; }
+.thd-tip--pickup { width: 300px; }
+.thd-tip__k { font-weight: 700; }
+.thd-tip p.thd-tip__k + p { margin-top: 0; }
+.thd-tip__gap { margin-top: 16px !important; }
+.thd-tip__link { margin-top: 0 !important; font-size: 12px; font-weight: 700; color: var(--color-blue-700); }
