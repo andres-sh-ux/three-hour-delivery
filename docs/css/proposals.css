@@ -11,7 +11,7 @@
 /* Chip shape switch (time-slot badges keep the pill: they use their own classes) */
 .thd-boltbox { display: inline-flex; align-items: center; justify-content: center; flex: none; }
 .thd-shape-rounded .thd-chip { border-radius: 4px; }                                   /* Square: rounded square, outlined */
-.thd-shape-tag .thd-chip { border-color: transparent; border-radius: 3px; background: #deefe2; }   /* Tag: slightly deeper light fill, no outline */
+.thd-shape-tag .thd-chip { border-color: transparent; border-radius: 3px; }            /* Tag: light fill, no outline */
 .thd-shape-bar .thd-chip { border: 0; border-left: 3px solid var(--color-green-500); border-radius: 0; padding: 1px 6px 1px 5px; }  /* Bar: left accent */
 /* Dark chip colour per shape */
 .thd-chip-dark.thd-shape-bar .thd-chip { border-left-color: #2f5420; }
