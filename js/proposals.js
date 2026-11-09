@@ -116,7 +116,7 @@
         var it = e.target.closest && e.target.closest(".thd-tip-on"); if (!it) return;
         var r = it.getBoundingClientRect(); tip.hidden = false;
         var w = tip.offsetWidth, x = Math.max(8, Math.min(r.left + r.width / 2 - w / 2, document.documentElement.clientWidth - w - 8));
-        tip.style.left = (x + window.scrollX) + "px"; tip.style.top = (r.top + window.scrollY - tip.offsetHeight - 12) + "px";
+        tip.style.left = (x + window.scrollX) + "px"; tip.style.top = (r.bottom + window.scrollY + 12) + "px";   // below the element, as on the live site
         tip.style.setProperty("--thd-tip-caret", (r.left + r.width / 2 - x - 9) + "px");
       }
       function hide(e) { if (e.target.closest && e.target.closest(".thd-tip-on")) tip.hidden = true; }
