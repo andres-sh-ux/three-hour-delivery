@@ -1,7 +1,7 @@
 /* 3-Hour Delivery proposals (project-only).
    State lives in the page link and carries across pages:
      p = a (current proposal, default) | b (chips everywhere)
-     cut = before | after (4PM cutoff)   t = short | mid | long (time label sample)
+     cut = before | after (4PM cutoff)   t = short | mid | long (Delivery time row: the buttons show the actual times for the cutoff)
      Chip: Tag (light fill, no outline) on PLP, PDP and Cart; Shipping and Review keep the pill (decided 2026-11-09; shape and colour switches retired).
      Product cards always show Delivery first and no truck icon (card order / PLP truck switches retired 2026-11-04).
      Link-only (no panel control): banner = off | on, icon = truck | 08 | 04b | 05b (PDP Delivery tile: truck + separate bolt, or a combined truck + bolt icon from Figma)
@@ -256,7 +256,7 @@
   /* ---- Review panel ---- */
   var ROWS = [
     ["cut", "Cutoff", [["before", "Before 4PM"], ["after", "After 4PM"], ["weekend", "Weekend"]]],
-    ["t", "Time label", [["short", "Short"], ["mid", "Medium"], ["long", "Long"]]]
+    ["t", "Delivery time (sample)", [["short", "2PM"], ["mid", "12PM"], ["long", "11:30AM"]]]
   ];
   var PAGES = [["plp", "PLP"], ["pdp", "PDP"], ["cart", "Cart"], ["shipping", "Shipping"], ["review", "Review"]];
   var panel;
@@ -287,8 +287,7 @@
   function panelSync() {
     if (!panel) return;
     SH.$$("[data-thd-k]", panel).forEach(function (b) { var on = S[b.getAttribute("data-thd-k")] === b.getAttribute("data-thd-v"); b.classList.toggle("is-on", on); b.setAttribute("aria-pressed", String(on)); });
-    var chipRow = SH.$('[data-thd-row="chip"]', panel); chipRow.classList.toggle("is-off", S.p !== "b");
-    SH.$$('[data-thd-k="chip"]', panel).forEach(function (b) { b.disabled = S.p !== "b"; });
+    SH.$$('[data-thd-k="t"]', panel).forEach(function (b) { b.textContent = TIMES[S.cut][b.getAttribute("data-thd-v")]; });   // Delivery time buttons show the actual times for the cutoff
     var here = (location.pathname.split("/").pop() || "index.html").replace(".html", "");
     SH.$$("[data-thd-page]", panel).forEach(function (a) { var on = a.getAttribute("data-thd-page") === here; a.classList.toggle("is-on", on); if (on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
   }
