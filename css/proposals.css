@@ -11,7 +11,7 @@
 /* Chip shape switch (time-slot badges keep the pill: they use their own classes) */
 .thd-boltbox { display: inline-flex; align-items: center; justify-content: center; flex: none; }
 .thd-shape-rounded .thd-chip { border-radius: 4px; }                                   /* Square: rounded square, outlined */
-.thd-shape-tag .thd-chip { border-color: transparent; border-radius: 3px; }            /* Tag: light fill, no outline */
+.thd-shape-tag .thd-chip:not(.thd-co-when-mark > .thd-chip) { border-color: transparent; border-radius: 3px; }   /* Tag: light fill, no outline (PLP, PDP, Cart); checkout keeps the pill */
 .thd-shape-bar .thd-chip { border: 0; border-left: 3px solid var(--color-green-500); border-radius: 0; padding: 1px 6px 1px 5px; }  /* Bar: left accent */
 /* Dark chip colour per shape */
 .thd-chip-dark.thd-shape-bar .thd-chip { border-left-color: #2f5420; }
@@ -118,3 +118,8 @@ img.thd-bolt { width: 8px !important; height: 12px !important; }   /* beat compo
 .thd-panel__seg button.is-on, .thd-panel__seg a.is-on { background: var(--color-blue-700); color: var(--color-white); font-weight: 700; box-shadow: 0 1px 2px rgba(0, 0, 0, .15); }
 .thd-panel__row--pages { margin-bottom: 6px; padding-bottom: 16px; border-bottom: 1px solid var(--color-gray-300); }
 .thd-panel__seg button:disabled { cursor: default; }
+
+/* Weekend (Friday after 4PM to Sunday 4PM): no badge, and the first slot drops its green "fastest" look */
+.thd-cut-weekend :is(.sh-co-slot, .sh-dflyout__slot).is-fastest { border-color: var(--color-blue-700); }
+.thd-cut-weekend .sh-slots__slot.is-fastest { border-color: var(--color-gray-400); }
+.thd-cut-weekend .sh-co-slot.is-fastest.is-selected { background: var(--color-blue-25); box-shadow: inset 0 0 0 2px var(--color-blue-700); }
