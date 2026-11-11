@@ -78,7 +78,7 @@
     if (fast) SH.$("b", fast).textContent = "By " + d.T;
     badge(SH.$('[data-sh-dflyout="badge"]', f), s, d);
     var first = grids[0] ? SH.$$(".sh-dflyout__slot", grids[0]) : [];
-    if (first[1]) first[1].hidden = s.cut !== "before";   // after the cutoff "By 8AM" replaces the 8AM - 12PM window
+    if (first[1]) first[1].hidden = false;   // all Local Delivery windows stay available after the cutoff (By 8AM is added first)
     var second = grids[1] ? SH.$$(".sh-dflyout__slot", grids[1]) : [];
     if (second[0] && !second[1]) { var c = second[0].cloneNode(true); SH.$("b", c).textContent = "1PM - 4PM"; grids[1].appendChild(c); }
   }
@@ -92,7 +92,7 @@
     if (fast) SH.$("b", fast).textContent = "By " + d.T;
     badge(SH.$('[data-sh-slots="badge"]', m), s, d);
     var grid = SH.$(".sh-slots__grid", m), first = grid ? SH.$$(".sh-slots__slot", grid) : [];
-    if (first[1]) first[1].hidden = s.cut !== "before";
+    if (first[1]) first[1].hidden = false;
   }
 
   /* ---- Product cards (PLP) ---- */
@@ -215,7 +215,7 @@
       var blocks = SH.$$(".sh-co-method__dayblock", root), t0 = blocks[0] ? SH.$$(".sh-co-slot", blocks[0]) : [], t1 = blocks[1] ? SH.$$(".sh-co-slot", blocks[1]) : [];
       var dayFull = d.dayFull, nextFull = d.nextFull;
       if (t0[0]) { SH.$("b", t0[0]).textContent = "By " + d.T; t0[0].setAttribute("data-sh-when", d.full); }
-      if (t0[1]) { t0[1].setAttribute("data-sh-when", dayFull + " by 12PM"); t0[1].hidden = s.cut !== "before"; }
+      if (t0[1]) { t0[1].setAttribute("data-sh-when", dayFull + " by 12PM"); t0[1].hidden = false; }
       if (t0[2]) t0[2].setAttribute("data-sh-when", dayFull + " by 4PM");
       if (t1[0]) t1[0].setAttribute("data-sh-when", nextFull + " by 12PM");
       badge(SH.$('[data-sh-co="badge"]', root), s, d);
