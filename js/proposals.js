@@ -219,6 +219,11 @@
       if (t0[2]) t0[2].setAttribute("data-sh-when", dayFull + " by 4PM");
       if (t1[0]) t1[0].setAttribute("data-sh-when", nextFull + " by 12PM");
       badge(SH.$('[data-sh-co="badge"]', root), s, d);
+      // Weekend: the first slot is a regular slot, so its check is blue like the others (green only for the 3-Hour / Early AM slot)
+      SH.$$(".sh-co-slot.is-fastest .sh-co-slot__check", root).forEach(function (img) {
+        if (!img.getAttribute("data-thd-src")) img.setAttribute("data-thd-src", img.getAttribute("src"));
+        var src = img.getAttribute("data-thd-src"); img.setAttribute("src", d.fast ? src : src.replace("check-circle.svg", "check-circle-blue.svg"));
+      });
       whenMarks(root, s, d);
       var ship = SH.$('[data-sh-co-option="ship"]', root), pick = SH.$('[data-sh-co-option="pickup"]', root);
       if (ship) { ship.setAttribute("data-sh-arrives", d.shipFull); var sw = SH.$(".sh-co-method__when", ship); if (sw) sw.textContent = "- " + d.shipFull; var ss = SH.$(".sh-co-method__sub", ship); if (ss) ss.textContent = d.shipFull; }
