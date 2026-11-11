@@ -30,7 +30,7 @@
   function data(s) {
     // before = weekday before 4PM (3-Hour) · after = weekday after 4PM (Early AM) ·
     // weekend = Friday after 4PM to Sunday 4PM: next slot is Monday, no 3-Hour / Early AM badge anywhere (Scott, 2026-11-09)
-    var T = TIMES[s.cut][s.t], b = s.cut === "before", wk = s.cut === "weekend";
+    var T = TIMES[s.cut][s.cut === "before" ? s.t : "short"], b = s.cut === "before", wk = s.cut === "weekend";   // Early AM / weekend is always by 8AM: the Delivery time sample only varies before 4PM
     var day = b ? "Today" : wk ? "Monday" : "Tomorrow";
     var next = b ? "Tomorrow" : wk ? "Tue, Nov 10" : "Thu, Nov 5";
     var pickup = b ? "in 1 Hour" : wk ? "Monday" : "Tomorrow";
@@ -301,7 +301,13 @@
   function panelSync() {
     if (!panel) return;
     SH.$$("[data-thd-k]", panel).forEach(function (b) { var on = S[b.getAttribute("data-thd-k")] === b.getAttribute("data-thd-v"); b.classList.toggle("is-on", on); b.setAttribute("aria-pressed", String(on)); });
-    SH.$$('[data-thd-k="t"]', panel).forEach(function (b) { b.textContent = TIMES[S.cut][b.getAttribute("data-thd-v")]; });   // Delivery time buttons show the actual times for the cutoff
+    SH.$$('[data-thd-k="t"]', panel).forEach(function (b) {
+      var v = b.getAttribute("data-thd-v"), locked = S.cut !== "before";   // after 4PM and weekends: always 8AM, other times disabled
+      b.textContent = TIMES[S.cut][v];
+      b.disabled = locked && v !== "short";
+      var on = locked ? v === "short" : S.t === v; b.classList.toggle("is-on", on); b.setAttribute("aria-pressed", String(on));
+      b.title = b.disabled ? "Early AM is always by 8AM" : "";
+    });   // Delivery time buttons show the actual times for the cutoff
     var here = (location.pathname.split("/").pop() || "index.html").replace(".html", "");
     SH.$$("[data-thd-page]", panel).forEach(function (a) { var on = a.getAttribute("data-thd-page") === here; a.classList.toggle("is-on", on); if (on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
   }

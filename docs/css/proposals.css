@@ -118,6 +118,7 @@ img.thd-bolt { width: 8px !important; height: 12px !important; }   /* beat compo
 .thd-panel__seg button.is-on, .thd-panel__seg a.is-on { background: var(--color-blue-700); color: var(--color-white); font-weight: 700; box-shadow: 0 1px 2px rgba(0, 0, 0, .15); }
 .thd-panel__row--pages { margin-bottom: 6px; padding-bottom: 16px; border-bottom: 1px solid var(--color-gray-300); }
 .thd-panel__seg button:disabled { cursor: default; }
+.thd-panel__seg button:disabled:not(.is-on) { color: var(--color-gray-400); }   /* Delivery time: locked to 8AM after 4PM and on weekends */
 
 /* Weekend (Friday after 4PM to Sunday 4PM): no badge, and the first slot drops its green "fastest" look */
 .thd-cut-weekend :is(.sh-co-slot, .sh-dflyout__slot).is-fastest { border-color: var(--color-blue-700); }
